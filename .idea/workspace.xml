@@ -14,8 +14,6 @@
     <list default="true" id="2b702a97-f0e2-4189-9643-33e67ba9b42e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SFMLRevolutionIsle.dir/objects.a" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SFMLRevolutionIsle.dir/objects.a" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/SFMLRevolutionIsle.exe" afterPath="$PROJECT_DIR$/cmake-build-debug/SFMLRevolutionIsle.exe" />
       <change beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/main.cpp" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -32,8 +30,8 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="917">
-              <caret line="60" column="18" lean-forward="false" selection-start-line="60" selection-start-column="18" selection-end-line="60" selection-end-column="18" />
+            <state relative-caret-position="187">
+              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -65,36 +63,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>for(int i=0;i&lt;getNode</find>
-      <find>addNode</find>
-      <find>nodeText</find>
-      <find>Astar</find>
-      <find>cost</find>
-      <find>setFill</find>
-      <find>setFil</find>
-      <find>aStarTestPath</find>
-      <find>Graph</find>
-      <find>getNodeByCoord</find>
-      <find>generate</find>
-      <find>getNodeByCoordGrid</find>
-      <find>setfillColor</find>
-      <find>.cost</find>
-      <find>node</find>
-      <find>generate_grid</find>
-      <find>rad</find>
-      <find>generate_gr</find>
-      <find>getNodeB</find>
-      <find>startRad</find>
-      <find>length %d</find>
-      <find>AStar</find>
-      <find>getCost</find>
-      <find>add_edge</find>
-      <find>SFML_t</find>
-      <find>tilete</find>
-      <find>SFML_T</find>
-      <find>printTileIds</find>
-      <find>Clock</find>
-      <find>printf</find>
+      <find>case 7</find>
+      <find>getTileF</find>
+      <find>printf(</find>
+      <find>click(</find>
+      <find>click</find>
+      <find>==ISLAND||</find>
+      <find>oldTileClick</find>
+      <find>oldTile</find>
+      <find>oldtileclick</find>
+      <find>warehouse</find>
+      <find>WARE</find>
+      <find>calculateDisplayMap</find>
+      <find>i=</find>
+      <find>31</find>
+      <find>corner</find>
+      <find>calculat</find>
+      <find>LIGHTHOUSe</find>
+      <find>display</find>
+      <find>ROAD</find>
+      <find>*3</find>
+      <find>3</find>
+      <find>3*</find>
+      <find>Calculat</find>
+      <find>roadwater</find>
+      <find>ROADWATER</find>
+      <find>printtileids</find>
+      <find>printtileids=</find>
+      <find>window.draw(time</find>
+      <find>timeTex</find>
+      <find>printTileIds=</find>
     </findStrings>
     <replaceStrings>
       <replace>deque</replace>
@@ -159,7 +157,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="CPPToolchains" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SFML_Test_2" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -206,18 +204,18 @@
       <workItem from="1539693162496" duration="157000" />
       <workItem from="1543951656140" duration="594000" />
       <workItem from="1546907187487" duration="1189000" />
-      <workItem from="1546911829561" duration="39683000" />
+      <workItem from="1546911829561" duration="97725000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102285000" />
+    <option name="totallyTimeSpent" value="160327000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="960" y="0" width="954" height="1040" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25159913" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25159913" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32330826" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -410,10 +408,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/Vector2.inl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Program Files (x86)/mingw-w64/i686-6.1.0-posix-dwarf-rt_v5-rev1/mingw32/i686-w64-mingw32/include/gdiplus/gdiplusgraphics.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="32" column="6" lean-forward="false" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="917">
-          <caret line="60" column="18" lean-forward="false" selection-start-line="60" selection-start-column="18" selection-end-line="60" selection-end-column="18" />
+        <state relative-caret-position="187">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
