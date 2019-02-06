@@ -72,5 +72,7 @@ CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj: C:/C\ stuff/SFML-2.4.2-windows-g
 CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj: C:/C\ stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/Window.hpp
 CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj: C:/C\ stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/WindowHandle.hpp
 CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj: C:/C\ stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/WindowStyle.hpp
+CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj: ../entities.h
 CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj: ../main.cpp
+CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj: ../tiles.h
 

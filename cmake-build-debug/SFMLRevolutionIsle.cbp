@@ -82,7 +82,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.h">
+			<Option target="SFMLRevolutionIsle"/>
+		</Unit>
 		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/main.cpp">
+			<Option target="SFMLRevolutionIsle"/>
+		</Unit>
+		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h">
 			<Option target="SFMLRevolutionIsle"/>
 		</Unit>
 		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/CMakeLists.txt">
