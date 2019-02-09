@@ -20,11 +20,18 @@
 
 #include "tiles.h"
 
-//Graph g;
 
 
-int screenWidth=800;
-int screenHeight=600;
+
+// x range
+int const colNo=50;
+//y range
+int const rowNo=40;
+
+
+
+const int screenWidth=800;
+const int screenHeight=600;
 namespace vec {
     float Length(sf::Vector2f _vec){
         float _x=_vec.x;
@@ -39,110 +46,108 @@ namespace vec {
         return _norm;
     }
 }
+
+
 sf::RenderWindow window(sf::VideoMode(screenWidth, screenHeight), "Revolution Isle",sf::Style::Close);
+sf::View view=window.getDefaultView();
 
 #include "entities.h"
 
-sf::Vector2f oldTileClick;
-void Click(int button,int _x,int _y,Graph *g){
-    sf::Vector2f tileClick=GetTileFromPos(sf::Vector2f(_x,_y));
-    int tileId=GetTileIdFromPos(sf::Vector2f(_x,_y));
+sf::Vector2i oldTileClick;
+void Click(int button,int _x,int _y,TileMap* tMap){
+    sf::Vector2i tileClick=(*tMap).getTileCoordsFromPos(sf::Vector2f(_x,_y),brushSize);
+    int tileId=(*tMap).getTileIdFromPos(sf::Vector2f(_x,_y),brushSize);
     //printf("old: %f,%f vs new: %f,%f (result:%b)\n",oldTileClick.x,oldTileClick.y,tileClick.x,tileClick.y,(tileClick==oldTileClick));
     if((_x>=0 && _x<=colNo*tileSize*scaleFactor.x) && (_y>=0 && _y<=rowNo*tileSize*scaleFactor.y) && tileId>-1 && tileId<rowNo*colNo+1) {
 
-        if(brushTile==NILTILE) {
-            if (!selectionBoxOn) {
-                selectionBoxOn = true;
-                selectionBoxStart = sf::Vector2f(_x, _y);
-                selectionBoxEnd = sf::Vector2f(_x, _y);
-            } else {
-                selectionBoxEnd = sf::Vector2f(_x, _y);
-                selectedFriends.clear();
-                //check box
-                for (int i = 0; i < friends.size(); i++) {
-                    Entity *f = &friends[i];
-                    sf::Vector2f fPos = (*f).m_pos;
-                    if (((fPos.x > selectionBoxStart.x && fPos.x < selectionBoxEnd.x) ||
-                         (fPos.x < selectionBoxStart.x && fPos.x > selectionBoxEnd.x))
-                        && (fPos.y > selectionBoxStart.y && fPos.y < selectionBoxEnd.y) ||
-                        (fPos.y < selectionBoxStart.y && fPos.y > selectionBoxEnd.y)) {
-                        selectedFriends.push_back(i);
-                    }
-                }
-            }
-        }
+
 
 
         if(tileClick!=oldTileClick){
-            printf("Click at %i,%i TILE: %f, %f (id %i)\n",_x,_y,tileClick.x,tileClick.y,tileId);
+            //printf("Click at %i,%i TILE: %f, %f (id %i)\n",_x,_y,tileClick.x,tileClick.y,tileId);
             oldTileClick=tileClick;
-            printf("clicked tile %f,%f\n", tileClick.x, tileClick.y);
-            //displayMap[3*((tileClickY*colNo)+tileClickX)+1]*=-1;
+            //printf("clicked tile %f,%f\n", tileClick.x, tileClick.y);
 
 
             for (int y = 0; y < brushSize; y++) {
                 for (int x = 0; x < brushSize; x++) {
-                    //int *tile = &map[(int) (((tileClick.y + y) * colNo) + tileClick.x + x)];
-                    Tile *tile = &tMap[(int) (((tileClick.y + y) * colNo) + tileClick.x + x)].basicTile;
+                    sf::Vector2i curTileCoords=tileClick;
+                    curTileCoords.x+=x;
+                    curTileCoords.y+=y;
+                    int tileId=(*tMap).getTileIdFromCoords(curTileCoords);
+                    Tile tileVal=(*(*tMap).getTileFromId(tileId)).basicTile;
+                    //Tile *tile = &tMap[(int) (((tileClick.y + y) * colNo) + tileClick.x + x)].basicTile;
                     if(button==1) {
                         //selectionBoxOn=false;
                         if (brushTile == WATER) {
-                            *tile = WATER;
+                            (*tMap).updateTile(tileId,WATER);
                         } else if (brushTile == ISLAND) {
-                            *tile = ISLAND;
+                            (*tMap).updateTile(tileId,ISLAND);
                         } else if (brushTile == ROAD) {
-                            if (*tile == ISLAND) {
-                                *tile = ROAD;
+                            if (tileVal == ISLAND) {
+                                (*tMap).updateTile(tileId,ROAD);
                             }
                         } else if (brushTile == WAREHOUSE) {
-                            if (*tile == ISLAND || *tile == ROAD) {
-                                *tile = WAREHOUSE;
-                            } else if (*tile == WAREHOUSE) {
-                                *tile = ISLAND;
+                            if (tileVal == ISLAND || tileVal == ROAD) {
+                                (*tMap).updateTile(tileId,WAREHOUSE);
+                            } else if (tileVal == WAREHOUSE) {
+                                (*tMap).updateTile(tileId,ISLAND);
                             }
                         } else if (brushTile == LIGHTHOUSE) {
-                            if (*tile == ISLAND || *tile == ROAD) {
-                                *tile = LIGHTHOUSE;
-                            } else if (*tile == LIGHTHOUSE) {
-                                *tile = ISLAND;
+                            if (tileVal == ISLAND || tileVal == ROAD) {
+                                (*tMap).updateTile(tileId,LIGHTHOUSE);
+                            } else if (tileVal == LIGHTHOUSE) {
+                                (*tMap).updateTile(tileId,ISLAND);
                             }
                         } else if (brushTile == DOCK) {
-                            if (*tile == WATER) {
-                                *tile = DOCK;
-                            } else if (*tile == DOCK) {
-                                *tile = WATER;
+                            if (tileVal == WATER) {
+                                (*tMap).updateTile(tileId,DOCK);
+                            } else if (tileVal == DOCK) {
+                                (*tMap).updateTile(tileId,WATER);
                             }
 
                         } else if (brushTile == ROADWATER) {
-                            if (*tile == WATER) {
-                                *tile = ROADWATER;
-                            } else if (*tile == ROADWATER) {
-                                *tile = WATER;
+                            if (tileVal == WATER) {
+                                (*tMap).updateTile(tileId,ROADWATER);
+                            } else if (tileVal == ROADWATER) {
+                                (*tMap).updateTile(tileId,WATER);
                             }
-                        } else if (brushTile == NILTILE) {
-
-
-
+                        }else if(brushTile==NILTILE) {
+                            if (!selectionBoxOn) {
+                                selectionBoxOn = true;
+                                selectionBoxStart = sf::Vector2f(_x, _y);
+                                selectionBoxEnd = sf::Vector2f(_x, _y);
+                            } else {
+                                selectionBoxEnd = sf::Vector2f(_x, _y);
+                                selectedFriends.clear();
+                                //check box
+                                for (int i = 0; i < friends.size(); i++) {
+                                    Entity *f = &friends[i];
+                                    sf::Vector2f fPos = (*f).m_pos;
+                                    if (((fPos.x > selectionBoxStart.x && fPos.x < selectionBoxEnd.x) ||
+                                         (fPos.x < selectionBoxStart.x && fPos.x > selectionBoxEnd.x))
+                                        && (fPos.y > selectionBoxStart.y && fPos.y < selectionBoxEnd.y) ||
+                                        (fPos.y < selectionBoxStart.y && fPos.y > selectionBoxEnd.y)) {
+                                        selectedFriends.push_back(i);
+                                    }
+                                }
+                            }
                         }
                     }else if(button==2){
-                        if (brushTile == NILTILE) {
 
-                            /*
-                            for (auto f = friends.begin(); f != friends.end(); ++f) {
-                                (*f).TryPath(tileId, g);
-                            }
-                            */
+                        if (brushTile == NILTILE) {
                             for (auto f = selectedFriends.begin(); f != selectedFriends.end(); ++f) {
-                                friends[*f].TryPath(tileId, g);
+                                friends[*f].tryPath(tileId);
                             }
                         }
-                        //selectionBoxOn=false;
+
                     }
-                    (*g).UpdateGraph(tMap);
                 }
 
             }
-            CalculateDisplayMap();
+            //end of loops
+
+
         }
     }
 }
@@ -154,7 +159,7 @@ int main(int argc, const char * argv[])
 {
     srand(time(NULL));
 
-
+    TileMap tMap(CIRCLE_ISLAND,colNo,rowNo,&window);
 
     //SFML Setup
     window.setVerticalSyncEnabled(true);
@@ -168,6 +173,13 @@ int main(int argc, const char * argv[])
     }
     int mouseX=window.getSize().x/2;
     int mouseY=window.getSize().y/2;
+    int mouseXView=window.getSize().x/2;
+    int mouseYView=window.getSize().y/2;
+    //how close the mouse needs to get to the screen edge to move the view
+    int screenMovePixelBuffer=50;
+    float viewZoom=1;
+
+
     sf::Text timeText;
 
     std::string tileImageFilePath="img/revolution_tiles.png";
@@ -200,46 +212,16 @@ int main(int argc, const char * argv[])
     charSprite.setTexture(charTexture);
 
 
-    /*
-    int map[colNo*rowNo]= {
-            0,0,0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,15,0,0,0,
-            0,0,2,4,4,4,23,2,0,0,
-            0,0,10,11,11,11,31,10,0,0,
-            0,0,10,11,11,11,39,10,0,0,
-            0,0,10,11,11,11,11,10,0,0,
-            0,0,18,19,20,21,21,18,0,0,
-            0,0,0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,0,0
-    };
-    */
-    /*for(int i=0;i<tileMapNoX*tileMapNoY;i++){
-        map[i]=i;
-    }*/
-    const int islandBuffer=6;
-    for(int i=0;i<colNo*rowNo;i++){
-        map[i]=0;
-        if(i%colNo<islandBuffer || i%colNo>(colNo-1)-islandBuffer || i/colNo<islandBuffer || i/colNo>(colNo-1)-islandBuffer){
-            tMap[i]=TileStruct{WATER,0,1,1};
-        }else{
-            tMap[i]=TileStruct{ISLAND,0,1,1};
-        }
-        //tMap[i]=TileStruct{ISLAND,0,1,1};
-
-    }
-
-    CalculateDisplayMap();
-    Graph g(colNo,rowNo,tMap);
     bool running=true;
 
 
 
-    friends.push_back(Entity());
+    friends.push_back(Entity(&tMap));
 
-    friends.push_back(Entity(screenWidth*0.35,screenHeight*0.35,1));
+    friends.push_back(Entity(&tMap,screenWidth*0.35,screenHeight*0.35,1));
 
-    friends.push_back(Entity(screenWidth*0.45,screenHeight*0.45,4));
+    friends.push_back(Entity(&tMap,screenWidth*0.45,screenHeight*0.45,4));
+
 
     sf::RectangleShape brush(sf::Vector2f(tileSize * brushSize * scaleFactor.x, tileSize * brushSize * scaleFactor.y));
     brush.setFillColor(sf::Color::Transparent);
@@ -247,7 +229,9 @@ int main(int argc, const char * argv[])
     brush.setOutlineColor(sf::Color::White);
 
     sf::CircleShape shape(10);
-    // run the program as long as the window is open
+
+
+     // run the program as long as the window is open
     while (window.isOpen())
     {
 
@@ -307,80 +291,64 @@ int main(int argc, const char * argv[])
                 }
 
                 if (event.type == sf::Event::MouseMoved) {
-                    mouseX = event.mouseMove.x;
-                    mouseY = event.mouseMove.y;
+                    mouseXView=event.mouseMove.x;
+                    mouseYView=event.mouseMove.y;
+                    sf::Vector2f worldMouseCoords=window.mapPixelToCoords(sf::Vector2i(event.mouseMove.x,event.mouseMove.y));
+                    mouseX = worldMouseCoords.x;
+                    mouseY = worldMouseCoords.y;
                 }
                 if (event.type == sf::Event::MouseWheelScrolled) {
                     if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
-                        scaleFactor.x += event.mouseWheelScroll.delta * 0.1;
-                        scaleFactor.y += event.mouseWheelScroll.delta * 0.1;
+                        //scaleFactor.x += event.mouseWheelScroll.delta * 0.1;
+                        //scaleFactor.y += event.mouseWheelScroll.delta * 0.1;
+                        viewZoom-=event.mouseWheelScroll.delta*0.1;
+                        view.zoom(1-(event.mouseWheelScroll.delta*0.1));
+                        window.setView(view);
+
                     }
                 }
+
             }
 
+
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && running) {
-                Click(1,mouseX, mouseY, &g);
+                Click(1,mouseX, mouseY, &tMap);
             }else if(sf::Mouse::isButtonPressed(sf::Mouse::Right) && running) {
-                Click(2, mouseX, mouseY, &g);
+                Click(2, mouseX, mouseY, &tMap);
             } else {
-                oldTileClick = sf::Vector2f(-100, -100);
+                oldTileClick = sf::Vector2i(-100, -100);
                 selectionBoxOn=false;
             }
 
-            //window.clear(sf::Color::Black);
-        window.clear(sf::Color(84,118,155));
-
-            for (int y = 0; y < rowNo; y++) {
-                for (int x = 0; x < colNo; x++) {
-                    //int mapVal=map[((y*colNo)+x)];
-                    Tile mapVal = tMap[((y * colNo) + x)].basicTile;
-                    //int tileVal=displayMap[displayParamNo*((y*colNo)+x)];
-                    int tileVal = tMap[((y * colNo) + x)].displayTile;
-                    int secs = clock.getElapsedTime().asSeconds();
-                    if (secs % 2 == 0) {
-                        switch (tileVal) {
-                            case 4:
-                                tileVal = 3;
-                                break;
-                        }
-                    }
-                    //int tileScaleX=displayMap[displayParamNo*((y*colNo)+x)+1];
-                    //int tileScaleY=displayMap[displayParamNo*((y*colNo)+x)+2];
-                    int tileScaleX = tMap[(y * colNo) + x].sx;
-                    int tileScaleY = tMap[(y * colNo) + x].sy;
-                    DrawTileAt(window,tileVal, x, y, tileScaleX, tileScaleY);
-                    if (tileVal == 24 || tileVal == 25 || tileVal == 51 || tileVal == 52) {
-                        int newTileVal = 17;
-                        int newX = x;
-                        int newY = y - 1;
-                        if (tileVal == 51 || tileVal == 52) {
-                            newTileVal = 16;
-                            newX = x - 1;
-                            newY = y;
-                            DrawTileAt(window,newTileVal, newX, newY, tileScaleX, tileScaleY);
-                        } else {
-                            DrawTileAt(window,newTileVal, newX, newY, tileScaleX, tileScaleY);
-                            newTileVal = 1;
-                            newX = x;
-                            newY = y + 1;
-                            DrawTileAt(window,newTileVal, newX, newY, tileScaleX, tileScaleY);
-                        }
-
-
-                    }
-                    if (printTileIds) {
-                        tileIdText.setString(std::to_string(mapVal));
-                        //tileIdText.setString("("+std::to_string(x)+","+std::to_string(y)+")");
-                        tileIdText.setFont(font);
-                        tileIdText.setCharacterSize(10);
-                        tileIdText.setFillColor(sf::Color::Red);
-                        tileIdText.setPosition(x * tileSize * scaleFactor.x, y * tileSize * scaleFactor.y);
-                        window.draw(tileIdText);
-                    }
-
-
+            //move view
+            if(running) {
+                sf::Vector2f viewOffset = sf::Vector2f(0, 0);
+                if (mouseXView < screenMovePixelBuffer) {
+                    viewOffset.x = -(screenMovePixelBuffer - mouseXView);
+                } else if (mouseXView > screenWidth - screenMovePixelBuffer) {
+                    viewOffset.x = screenMovePixelBuffer - (screenWidth - mouseXView);
                 }
+                if (mouseYView < screenMovePixelBuffer) {
+                    viewOffset.y = -(screenMovePixelBuffer - mouseYView);
+                } else if (mouseYView > screenHeight - screenMovePixelBuffer) {
+                    viewOffset.y = screenMovePixelBuffer - (screenHeight - mouseYView);
+                }
+                viewOffset.x *= 0.1;
+                viewOffset.y *= 0.1;
+
+                view.move(viewOffset);
+                window.setView(view);
+
             }
+
+            //window.clear(sf::Color::Black);
+            window.clear(sf::Color(84,118,155));
+
+
+
+
+            int secs = clock.getElapsedTime().asSeconds();
+            tMap.draw(secs);
 
 
             //shape.setRadius(10);
@@ -390,7 +358,7 @@ int main(int argc, const char * argv[])
 
             for(auto f=friends.begin();f!=friends.end();++f) {
                 (*f).moveToTarget();
-                (*f).Draw(window);
+                (*f).draw(&window);
             }
 
 
@@ -398,13 +366,15 @@ int main(int argc, const char * argv[])
 
 
             brush.setSize(sf::Vector2f(tileSize * brushSize * scaleFactor.x, tileSize * brushSize * scaleFactor.y));
-            sf::Vector2f brushPos = GetTileFromPos(sf::Vector2f(mouseX, mouseY));
+            sf::Vector2i brushPos = tMap.getTileCoordsFromPos(sf::Vector2f(mouseX, mouseY),brushSize);
             brushPos.x *= tileSize * scaleFactor.x;
             brushPos.y *= tileSize * scaleFactor.y;
             if(brushPos.x>=0&&brushPos.x<colNo*tileSize*scaleFactor.x&&brushPos.y>=0&&brushPos.y<rowNo*tileSize*scaleFactor.y) {
-                brush.setPosition(brushPos);
+                brush.setPosition(sf::Vector2f(brushPos.x,brushPos.y));
             }
-            window.draw(brush);
+            if(!selectionBoxOn) {
+                window.draw(brush);
+            }
 
             if(selectionBoxOn) {
                 sf::RectangleShape selectionBox = sf::RectangleShape(selectionBoxEnd - selectionBoxStart);
@@ -462,20 +432,9 @@ int main(int argc, const char * argv[])
             timeText.setPosition(10, 10);
             window.draw(timeText);
 
-            /*
-            timeText.setString(std::to_string());
-            timeText.setFont(font);
-            timeText.setCharacterSize(24);
-            timeText.setFillColor(sf::Color::White);
-            timeText.setPosition(10,10);
-            window.draw(timeText);
-            */
 
 
-
-
-
-        window.display();
+            window.display();
 
     }
 

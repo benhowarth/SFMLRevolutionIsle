@@ -9,9 +9,11 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
+#include "tiles.h"
+
 sf::Sprite charSprite;
 
-void DrawCharAt(sf::RenderWindow &win,int charDir,int x,int y,float scaleX,float scaleY){
+void drawCharAt(sf::RenderWindow &win,int charDir,int x,int y,float scaleX,float scaleY){
     charSprite.setOrigin(0,0);
     charSprite.setTextureRect(sf::IntRect(charDir*tileSize,0,tileSize,tileSize));
     charSprite.setOrigin(tileSize/2,tileSize/2);
@@ -23,54 +25,59 @@ void DrawCharAt(sf::RenderWindow &win,int charDir,int x,int y,float scaleX,float
 }
 
 class Entity{
-//private:
+private:
+    float s_roadSpeedBoost=1.5;
 public:
     sf::Vector2f m_tPos;
     sf::Vector2f m_pos;
     sf::Vector2f m_size=sf::Vector2f(tileSize,tileSize);
     sf::Vector2f m_vel=sf::Vector2f(0,0);;
-    std::vector<sf::Vector2f> targets;
-    float speed=2;
+    std::vector<sf::Vector2f> m_targets;
+    float m_speed=2;
+    TileMap* m_tMap;
 public:
-    Entity(){
+    Entity(TileMap* t_tMap){
         m_pos=sf::Vector2f(screenWidth*0.3,screenHeight*0.3);
         m_tPos=m_pos;
+        m_tMap=t_tMap;
     }
-    Entity(float _x,float _y){
-        m_pos=sf::Vector2f(_x,_y);
+    Entity(TileMap* t_tMap,float t_x,float t_y){
+        m_pos=sf::Vector2f(t_x,t_y);
         m_tPos=m_pos;
+        m_tMap=t_tMap;
     }
-    Entity(float _x,float _y,float _speed){
-        m_pos=sf::Vector2f(_x,_y);
+    Entity(TileMap* t_tMap,float t_x,float t_y,float t_speed){
+        m_pos=sf::Vector2f(t_x,t_y);
         m_tPos=m_pos;
-        speed=_speed;
+        m_speed=t_speed;
+        m_tMap=t_tMap;
     }
-    void Draw(sf::RenderWindow &win){
+    void draw(sf::RenderWindow* win){
 
 
-        if(targets.size()>0) {
+        if(m_targets.size()>0) {
             sf::CircleShape circ = sf::CircleShape(10);
             //circ.setPosition(m_tPos);
-            sf::Vector2f circPos=targets[targets.size() - 1];
+            sf::Vector2f circPos=m_targets[m_targets.size() - 1];
             circPos.x-=5;
             circPos.y-=5;
             circ.setPosition(circPos);
             circ.setFillColor(sf::Color::Green);
-            win.draw(circ);
+            (*win).draw(circ);
         }
 
-        sf::Vertex pathLine[targets.size()+1];
+        sf::Vertex pathLine[m_targets.size()+1];
         pathLine[0]=sf::Vertex(m_tPos);
         pathLine[0].color=sf::Color::Red;
         //for(auto target=targets.begin();target!=targets.end();++target){
-        for(int i=0;i<targets.size();i++){
+        for(int i=0;i<m_targets.size();i++){
             //circ.setPosition(*target);
             //circ.setFillColor(sf::Color::Red);
             //win.draw(circ);
-            pathLine[i+1]=sf::Vertex(targets[i]);
+            pathLine[i+1]=sf::Vertex(m_targets[i]);
             pathLine[i+1].color=sf::Color::Red;
         }
-        win.draw(pathLine,targets.size()+1,sf::LinesStrip);
+        (*win).draw(pathLine,m_targets.size()+1,sf::LinesStrip);
 
         /*
         sf::RectangleShape rect=sf::RectangleShape(m_pos);
@@ -81,7 +88,7 @@ public:
         win.draw(rect);
         */
 
-        DrawCharAt(win,getVelDirInt(),m_pos.x,m_pos.y,1,1);
+        drawCharAt((*win),getVelDirInt(),m_pos.x,m_pos.y,1,1);
 
         //printf("angleVel: %f (dir:%i)\n",getVelAngle(),getVelDirInt());
 
@@ -92,30 +99,30 @@ public:
     int getVelDirInt(){
         return ((int)std::round((getVelAngle()*8)/(2*3.14)+8))%8;
     }
-    void setVel(float x,float y){
-        m_vel.x=x;
-        m_vel.y=y;
+    void setVel(float t_x,float t_y){
+        m_vel.x=t_x;
+        m_vel.y=t_y;
     }
-    void addTarget(sf::Vector2f _tar){
-        targets.push_back(_tar);
+    void addTarget(sf::Vector2f t_target){
+        m_targets.push_back(t_target);
     }
     void nextTarget(){
 
-        if(!targets.empty()) {
-            sf::Vector2f nextTar = targets.front();
-            targets.erase(targets.begin());
-            m_tPos.x = nextTar.x;
-            m_tPos.y = nextTar.y;
+        if(!m_targets.empty()) {
+            sf::Vector2f nextTar = m_targets.front();
+            m_targets.erase(m_targets.begin());
+            setTarget(nextTar);
         }
     }
-    void setTarget(float x,float y){
-        m_tPos.x=x;
-        m_tPos.y=y;
-    }
-    void setTarget(sf::Vector2f _newPos){
-        m_tPos=_newPos;
+    void setTarget(sf::Vector2f t_newPos){
+        m_tPos=t_newPos;
     }
     void moveToTarget(){
+        float speed=m_speed;
+        if(getCurrentTile()->basicTile==ROAD||getCurrentTile()->basicTile==ROADWATER){
+            speed*=s_roadSpeedBoost;
+        }
+
         if(vec::Length(m_tPos-m_pos)>speed){
             //printf("%f\n",vec::Length(m_tPos-m_pos));
             m_vel=vec::Normalise(m_tPos-m_pos)*speed;
@@ -125,19 +132,24 @@ public:
         }
         //printf("%f,%f\n",m_pos.x,m_pos.y);
     }
-    void TryPath(int tileId,Graph* g) {
-        int curTileId = GetTileIdFromPos(m_tPos);
+    TileStruct* getCurrentTile(){
+        return m_tMap->getTileFromId(m_tMap->getTileIdFromPos(m_tPos,1));
+    }
+    void tryPath(int tileId) {
+        int curTileId = (*m_tMap).getTileIdFromPos(m_tPos,1);
         printf("from id:%i to id:%i\n", curTileId, tileId);
         //int curTileId=GetTileIdFromPos(f.targets[0]);
         if (curTileId != tileId) {
-            std::vector<int> path = (*g).GetPath(curTileId, tileId, tMap);
+            //std::vector<int> path = (*g).GetPath(curTileId, tileId, tMap);
+            std::vector<int> path = (*m_tMap).getPath(curTileId, tileId, tMask_land);
+
             printf("PATH: ");
             for (int p = 0; p < path.size(); p++) {
                 printf("%i, ", path[p]);
             }
             printf("\n");
             //printf("%i to %i\n",curTileId,tileClickId);
-            targets.clear();
+            m_targets.clear();
             for (int p = 0; p < path.size(); p++) {
                 int tilePathId = path[p];
                 sf::Vector2f tilePos = sf::Vector2f((tilePathId % colNo) * tileSize * scaleFactor.x,

@@ -647,6 +647,8 @@ SFML/Window.hpp
 -
 SFML/Graphics.hpp
 -
+tiles.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
 
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/main.cpp
 iostream
@@ -676,6 +678,10 @@ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
 entities.h
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.h
 
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/noise.h
+cmath
+-
+
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
 SFML/System.hpp
 -
@@ -683,4 +689,6 @@ SFML/Window.hpp
 -
 SFML/Graphics.hpp
 -
+noise.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/noise.h
 
