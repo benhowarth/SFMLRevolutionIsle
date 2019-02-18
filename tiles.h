@@ -5,11 +5,16 @@
 #ifndef SFMLREVOLUTIONISLE_TILES_H
 #define SFMLREVOLUTIONISLE_TILES_H
 
+
+
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
 #include "noise.h"
+
+#include<vector>
+#include<algorithm>
 
 
 #define NODE_MAX_COST 500
@@ -60,6 +65,7 @@ struct TileStruct{
     TileStruct(Tile t_basicTile){
         basicTile=t_basicTile;
     }
+
 };
 
 class TileMap {
@@ -93,63 +99,63 @@ private:
     };
 
 public:
-    TileMap(int t_colNo, int t_rowNo, sf::RenderWindow* t_win) {
-        TileMap(SQUARE_ISLAND,t_colNo,t_rowNo,t_win);
+    TileMap(int t_colNo, int t_rowNo, sf::RenderWindow *t_win) {
+        TileMap(SQUARE_ISLAND, t_colNo, t_rowNo, t_win);
     }
-    TileMap(IslandType t_islandToMake, int t_colNo, int t_rowNo, sf::RenderWindow* t_win) {
+
+    TileMap(IslandType t_islandToMake, int t_colNo, int t_rowNo, sf::RenderWindow *t_win) {
         m_colNo = t_colNo;
         m_rowNo = t_rowNo;
         m_win = t_win;
-        m_tiles.reserve(m_colNo*m_rowNo);
+        m_tiles.reserve(m_colNo * m_rowNo);
         generateIsland(t_islandToMake);
     }
 
 
-    void generateIsland(IslandType t_islandToMake){
-        if(t_islandToMake==SQUARE_ISLAND){
-            int islandBuffer=6;
-            for(int i=0;i<m_colNo*m_rowNo;i++){
-                sf::Vector2i coords=sf::Vector2i(i%m_colNo,i/m_colNo);
-                if((coords.x<islandBuffer) || (coords.x>(m_colNo-1)-islandBuffer) || (coords.y<islandBuffer) || (coords.y>(m_rowNo-1)-islandBuffer)) {
+    void generateIsland(IslandType t_islandToMake) {
+        if (t_islandToMake == SQUARE_ISLAND) {
+            int islandBuffer = 10;
+            for (int i = 0; i < m_colNo * m_rowNo; i++) {
+                sf::Vector2i coords = sf::Vector2i(i % m_colNo, i / m_colNo);
+                if ((coords.x < islandBuffer) || (coords.x > (m_colNo - 1) - islandBuffer) ||
+                    (coords.y < islandBuffer) || (coords.y > (m_rowNo - 1) - islandBuffer)) {
                     m_tiles.emplace_back(WATER);
-                }else{
+                } else {
                     m_tiles.emplace_back(ISLAND);
                 }
             }
-        }else if(t_islandToMake==CIRCLE_ISLAND){
-            int islandRad=10;
-            for(int i=0;i<m_colNo*m_rowNo;i++){
-                sf::Vector2i coords=sf::Vector2i(i%m_colNo,i/m_colNo);
-                coords.x-=(m_colNo/2);
-                coords.y-=(m_rowNo/2);
-                if((coords.x*coords.x+coords.y*coords.y)>islandRad*islandRad){
+        } else if (t_islandToMake == CIRCLE_ISLAND) {
+            int islandRad = 10;
+            for (int i = 0; i < m_colNo * m_rowNo; i++) {
+                sf::Vector2i coords = sf::Vector2i(i % m_colNo, i / m_colNo);
+                coords.x -= (m_colNo / 2);
+                coords.y -= (m_rowNo / 2);
+                if ((coords.x * coords.x + coords.y * coords.y) > islandRad * islandRad) {
                     m_tiles.emplace_back(WATER);
-                }else{
+                } else {
                     m_tiles.emplace_back(ISLAND);
                 }
             }
-        }else if(t_islandToMake==NOISE_ISLAND){
-            int islandRad=15;
-            for(int i=0;i<m_colNo*m_rowNo;i++){
-                sf::Vector2i coords=sf::Vector2i(i%m_colNo,i/m_colNo);
-                coords.x-=(m_colNo/2);
-                coords.y-=(m_rowNo/2);
-                if((coords.x*coords.x+coords.y*coords.y)>islandRad*islandRad && getNoise(coords.x,coords.y)>0.6){
+        } else if (t_islandToMake == NOISE_ISLAND) {
+            int islandRad = 15;
+            for (int i = 0; i < m_colNo * m_rowNo; i++) {
+                sf::Vector2i coords = sf::Vector2i(i % m_colNo, i / m_colNo);
+                coords.x -= (m_colNo / 2);
+                coords.y -= (m_rowNo / 2);
+                if ((coords.x * coords.x + coords.y * coords.y) > islandRad * islandRad &&
+                    getNoise(coords.x, coords.y) > 0.6) {
                     m_tiles.emplace_back(WATER);
-                }else{
+                } else {
                     m_tiles.emplace_back(ISLAND);
                 }
             }
         }
 
 
-
-
-        for(int i=0;i<m_colNo*m_rowNo;i++) {
+        for (int i = 0; i < m_colNo * m_rowNo; i++) {
             updateTile(i);
         }
     }
-
 
 
     sf::Vector2i getTileCoordsFromId(int t_id) {
@@ -173,9 +179,10 @@ public:
 
     }
 
-    TileStruct* getTileFromId(int t_id){
+    TileStruct *getTileFromId(int t_id) {
         return &m_tiles[t_id];
     }
+
     int getTileIdFromPos(sf::Vector2f t_pos, int t_brushSize) {
         return getTileIdFromCoords(getTileCoordsFromPos(t_pos, t_brushSize));
     }
@@ -207,7 +214,7 @@ public:
     void resetTile(int t_id) {
         //m_tiles[t_id].parent= nullptr;
         m_tiles[t_id].parent = -1;
-        m_tiles[t_id].costSoFar = NODE_MAX_COST*NODE_MAX_COST*m_rowNo*m_colNo;
+        m_tiles[t_id].costSoFar = NODE_MAX_COST * NODE_MAX_COST * m_rowNo * m_colNo;
         m_tiles[t_id].visited = false;
     }
 
@@ -223,13 +230,13 @@ public:
         //update ns
         (*t).ns.clear();
         std::vector<int> ns;
-        sf::Vector2i coords=getTileCoordsFromId(t_id);
-        for(int i=0;i<8;i++){
-            sf::Vector2i nCoords=coords;
-            nCoords.x+=moves[i][0];
-            nCoords.y+=moves[i][1];
+        sf::Vector2i coords = getTileCoordsFromId(t_id);
+        for (int i = 0; i < 8; i++) {
+            sf::Vector2i nCoords = coords;
+            nCoords.x += moves[i][0];
+            nCoords.y += moves[i][1];
 
-            if(nCoords.x>-1 && nCoords.x<m_colNo && nCoords.y>-1 && nCoords.y<m_rowNo){
+            if (nCoords.x > -1 && nCoords.x < m_colNo && nCoords.y > -1 && nCoords.y < m_rowNo) {
                 (*t).ns.push_back(getTileIdFromCoords(nCoords));
             }
         }
@@ -237,7 +244,7 @@ public:
         //update cost
         (*t).cost = tileWeights[t->basicTile];
         //update display map
-        sf::Vector2i tCoords=getTileCoordsFromId(t_id);
+        sf::Vector2i tCoords = getTileCoordsFromId(t_id);
         //printf("looking at %i,%i\n",tx,ty);
         int sx = 1;
         int sy = 1;
@@ -245,7 +252,7 @@ public:
         if (tileVal == WATER) {
 
 
-            int bm = getBitmaskFromTileId(t_id,tMask_island_general);
+            int bm = getBitmaskFromTileId(t_id, tMask_island_general);
 
             switch (bm) {
                 //surrounded
@@ -314,11 +321,11 @@ public:
             }
             if (bm == 0) {
                 for (int m = 0; m < 4; m++) {
-                    sf::Vector2i nCoords=tCoords;
+                    sf::Vector2i nCoords = tCoords;
                     nCoords.x += movesDiagonal[m][0];
                     nCoords.y += movesDiagonal[m][1];
                     int angle = 0;
-                    Tile nT=m_tiles[getTileIdFromCoords(nCoords)].basicTile;
+                    Tile nT = m_tiles[getTileIdFromCoords(nCoords)].basicTile;
                     //printf("\tmove %i %i,%i:\n",m+1,nx,ny);
                     if (nCoords.x >= 0 && nCoords.x < m_colNo && nCoords.y >= 0 && nCoords.y < m_rowNo) {
                         if (nT == ISLAND || nT == ROAD || nT == WAREHOUSE || nT == LIGHTHOUSE) {
@@ -334,9 +341,9 @@ public:
                     }
                 }
                 //place structures
-                sf::Vector2i aboveTCoords=tCoords;
+                sf::Vector2i aboveTCoords = tCoords;
                 aboveTCoords.y--;
-                Tile aboveTBasicTile=m_tiles[getTileIdFromCoords(aboveTCoords)].basicTile;
+                Tile aboveTBasicTile = m_tiles[getTileIdFromCoords(aboveTCoords)].basicTile;
                 if (tileVal == 0 && tCoords.y - 1 >= 0 && aboveTBasicTile == ROADWATER) {
                     bool evenX = tCoords.x % 2 == 0;
                     if (evenX) {
@@ -351,7 +358,7 @@ public:
         } else if (tileVal == ROAD) {
             //tileVal=26;
             //do bitmask for road
-            int bmr = getBitmaskFromTileId(t_id,tMask_roads);
+            int bmr = getBitmaskFromTileId(t_id, tMask_roads);
             switch (bmr) {
                 //surrounded
                 case 15:
@@ -443,9 +450,9 @@ public:
 
         } else if (tileVal == DOCK) {
 
-            int bmr = getBitmaskFromTileId(t_id,tMask_roads);
-            TileStruct* aboveT=&m_tiles[getTileIdFromCoords(sf::Vector2i(tCoords.x,tCoords.y-1))];
-            TileStruct* belowT=&m_tiles[getTileIdFromCoords(sf::Vector2i(tCoords.x,tCoords.y+1))];
+            int bmr = getBitmaskFromTileId(t_id, tMask_roads);
+            TileStruct *aboveT = &m_tiles[getTileIdFromCoords(sf::Vector2i(tCoords.x, tCoords.y - 1))];
+            TileStruct *belowT = &m_tiles[getTileIdFromCoords(sf::Vector2i(tCoords.x, tCoords.y + 1))];
             if (tCoords.y - 1 >= 0 && (*aboveT).basicTile == ISLAND) {
                 tileVal = 51;
             } else if (tCoords.y < m_rowNo && (*belowT).basicTile == ISLAND) {
@@ -468,9 +475,9 @@ public:
         } else if (tileVal == ROADWATER) {
             tileVal = 25;
 
-            int bmr = getBitmaskFromTileId(t_id,tMask_roads);
-            TileStruct* aboveT=&m_tiles[getTileIdFromCoords(sf::Vector2i(tCoords.x,tCoords.y-1))];
-            TileStruct* belowT=&m_tiles[getTileIdFromCoords(sf::Vector2i(tCoords.x,tCoords.y+1))];
+            int bmr = getBitmaskFromTileId(t_id, tMask_roads);
+            TileStruct *aboveT = &m_tiles[getTileIdFromCoords(sf::Vector2i(tCoords.x, tCoords.y - 1))];
+            TileStruct *belowT = &m_tiles[getTileIdFromCoords(sf::Vector2i(tCoords.x, tCoords.y + 1))];
 
             if (tCoords.y - 1 >= 0 && (*aboveT).basicTile == ISLAND) {
                 tileVal = 52;
@@ -511,38 +518,42 @@ public:
         m_tiles[t_id].sy = sy;
 
 
-
     }
-    void updateTile(int t_id,Tile t_newBasicTile){
-        m_tiles[t_id].basicTile=t_newBasicTile;
-        sf::Vector2i coords=getTileCoordsFromId(t_id);
+
+    void updateTile(int t_id, Tile t_newBasicTile) {
+        m_tiles[t_id].basicTile = t_newBasicTile;
+        sf::Vector2i coords = getTileCoordsFromId(t_id);
         //updateTile(t_id);
-        for(int y=coords.y-1;y<coords.y+2;y++){
-            for(int x=coords.x-1;x<coords.x+2;x++){
-                if(x>0 && x<m_colNo-1 && y>0 && y<m_rowNo-1) {
+        for (int y = coords.y - 1; y < coords.y + 2; y++) {
+            for (int x = coords.x - 1; x < coords.x + 2; x++) {
+                if (x > 0 && x < m_colNo - 1 && y > 0 && y < m_rowNo - 1) {
                     updateTile(getTileIdFromCoords(sf::Vector2i(x, y)));
                 }
             }
         }
     }
-    void drawTile(int t_displayTile,int t_x,int t_y,int sx,int sy){
-        int tileMapX=t_displayTile%tileMapNoX;
-        int tileMapY=t_displayTile/tileMapNoX;
-        tile.setOrigin(0,0);
-        tile.setTextureRect(sf::IntRect(tileMapX*tileSize,tileMapY*tileSize,tileSize,tileSize));
-        tile.setOrigin(tileSize/2,tileSize/2);
-        tile.setScale(scaleFactor.x*(sx),scaleFactor.y*(sy));
-        tile.setOrigin(0,0);
-        tile.setPosition((t_x-((sx)-1)/2)*tileSize*scaleFactor.x,(t_y-((sy)-1)/2)*tileSize*scaleFactor.y);
+
+    void drawTile(int t_displayTile, int t_x, int t_y, int sx, int sy) {
+        int tileMapX = t_displayTile % tileMapNoX;
+        int tileMapY = t_displayTile / tileMapNoX;
+        tile.setOrigin(0, 0);
+        tile.setTextureRect(sf::IntRect(tileMapX * tileSize, tileMapY * tileSize, tileSize, tileSize));
+        tile.setOrigin(tileSize / 2, tileSize / 2);
+        tile.setScale(scaleFactor.x * (sx), scaleFactor.y * (sy));
+        tile.setOrigin(0, 0);
+        tile.setPosition((t_x - ((sx) - 1) / 2) * tileSize * scaleFactor.x,
+                         (t_y - ((sy) - 1) / 2) * tileSize * scaleFactor.y);
         (*m_win).draw(tile);
     }
-    void drawTileId(int t_id){
-        TileStruct* tileToDraw=&m_tiles[t_id];
-        sf::Vector2i coords=getTileCoordsFromId(t_id);
-        drawTile(tileToDraw->displayTile,coords.x,coords.y,tileToDraw->sx,tileToDraw->sy);
+
+    void drawTileId(int t_id) {
+        TileStruct *tileToDraw = &m_tiles[t_id];
+        sf::Vector2i coords = getTileCoordsFromId(t_id);
+        drawTile(tileToDraw->displayTile, coords.x, coords.y, tileToDraw->sx, tileToDraw->sy);
     }
-    void draw(int secs){
-        for(int i=0;i<m_tiles.size();i++){
+
+    void draw(int secs) {
+        for (int i = 0; i < m_tiles.size(); i++) {
             //int mapVal=map[((y*colNo)+x)];
             Tile basicTile = m_tiles[i].basicTile;
             //int tileVal=displayMap[displayParamNo*((y*colNo)+x)];
@@ -554,9 +565,9 @@ public:
                         break;
                 }
             }
-            sf::Vector2i coords=getTileCoordsFromId(i);
-            int sx=m_tiles[i].sx;
-            int sy=m_tiles[i].sy;
+            sf::Vector2i coords = getTileCoordsFromId(i);
+            int sx = m_tiles[i].sx;
+            int sy = m_tiles[i].sy;
             drawTileId(i);
             if (displayTile == 24 || displayTile == 25 || displayTile == 51 || displayTile == 52) {
                 int newDisplayTile = 17;
@@ -566,27 +577,40 @@ public:
                     newDisplayTile = 16;
                     newX = coords.x - 1;
                     newY = coords.y;
-                    drawTile(newDisplayTile,newX,newY,sx,sy);
+                    drawTile(newDisplayTile, newX, newY, sx, sy);
                 } else {
-                    drawTile(newDisplayTile,newX,newY,sx,sy);
+                    drawTile(newDisplayTile, newX, newY, sx, sy);
                     newDisplayTile = 1;
                     newX = coords.x;
                     newY = coords.y + 1;
-                    drawTile(newDisplayTile,newX,newY,sx,sy);
+                    drawTile(newDisplayTile, newX, newY, sx, sy);
                 }
 
 
-            }else if(basicTile==LIGHTHOUSE){
+            } else if (basicTile == LIGHTHOUSE) {
                 int newX = coords.x;
-                int newY = coords.y-1;
-                drawTile(31,newX,newY,1,1);
+                int newY = coords.y - 1;
+                drawTile(31, newX, newY, 1, 1);
                 newY--;
-                drawTile(23,newX,newY,1,1);
+                drawTile(23, newX, newY, 1, 1);
                 newY--;
-                drawTile(15,newX,newY,1,1);
+                drawTile(15, newX, newY, 1, 1);
             }
         }
     }
+
+    float getH(int t_id, int t_idStart, int t_idEnd) {
+        sf::Vector2i startCoords = getTileCoordsFromId(t_idStart);
+        sf::Vector2i endCoords = getTileCoordsFromId(t_idEnd);
+        sf::Vector2i nCoords = getTileCoordsFromId(t_id);
+        sf::Vector2i nDistFromEnd = endCoords - nCoords;
+        sf::Vector2i nDistFromStart = startCoords - nCoords;
+        float h=(nDistFromEnd.x * nDistFromEnd.x) + (nDistFromEnd.y * nDistFromEnd.y);
+        //float h = std::sqrt((nDistFromEnd.x * nDistFromEnd.x) + (nDistFromEnd.y * nDistFromEnd.y));
+        h += (std::abs(nDistFromEnd.x * nDistFromStart.y - nDistFromStart.x * nDistFromEnd.y)) * 0.1;
+        return h;
+    }
+
 
     std::vector<int> getPath(int t_idStart,int t_idEnd,std::vector<Tile> t_mask){
         sf::Vector2i startCoords=getTileCoordsFromId(t_idStart);
@@ -599,12 +623,30 @@ public:
         m_tiles[t_idStart].costSoFar=0;
         while(!toVisit.empty()){
 
+
             int id=toVisit.back();
+
+
+
+            for(int possibleId:toVisit){
+                if(id!=possibleId && !m_tiles[possibleId].visited){
+                    float costId= m_tiles[id].costSoFar+m_tiles[id].cost+getH(id,t_idStart,t_idEnd);
+                    float costPossibleId= m_tiles[possibleId].costSoFar+m_tiles[possibleId].cost+getH(possibleId,t_idStart,t_idEnd);
+
+                    if(costPossibleId<costId){
+                        id=possibleId;
+                        continue;
+                    }
+                }
+            }
+
+
             sf::Vector2i coords=getTileCoordsFromId(id);
             m_tiles[id].visited=true;
 
             toVisit.pop_back();
-            std::vector<int> ns=m_tiles[id].ns;
+
+            std::vector<int> &ns=m_tiles[id].ns;
             for(int i=0;i<ns.size();i++){
                 int n=ns[i];
                 if(!(m_tiles[n].visited)){
@@ -620,13 +662,7 @@ public:
                     if(maskOk) {
 
                         toVisit.push_back(n);
-
-                        sf::Vector2i nCoords = getTileCoordsFromId(n);
-                        sf::Vector2i nDistFromEnd = endCoords - nCoords;
-                        sf::Vector2i nDistFromStart = startCoords - nCoords;
-
-                        float h = std::sqrt((nDistFromEnd.x * nDistFromEnd.x) + (nDistFromEnd.y * nDistFromEnd.y));
-                        h += (std::abs(nDistFromEnd.x * nDistFromStart.y - nDistFromStart.x * nDistFromEnd.y)) * 0.1;
+                        float h=getH(n,t_idStart,t_idEnd);
                         //if ((nCoords.x - coords.x) != 0 && (nCoords.y - coords.y) != 0) { h *= 0.5; }
 
                         int costTemp = m_tiles[id].costSoFar + m_tiles[id].cost;

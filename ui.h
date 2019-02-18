@@ -1,0 +1,8 @@
+//
+// Created by Ben on 12/02/2019.
+//
+
+#ifndef SFMLREVOLUTIONISLE_UI_H
+#define SFMLREVOLUTIONISLE_UI_H
+
+#endif //SFMLREVOLUTIONISLE_UI_H

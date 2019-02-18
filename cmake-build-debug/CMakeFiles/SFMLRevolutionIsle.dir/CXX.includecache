@@ -675,12 +675,18 @@ vector
 -
 tiles.h
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
+resources.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.h
+ui.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/ui.h
 entities.h
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.h
 
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/noise.h
 cmath
 -
+
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.h
 
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
 SFML/System.hpp
@@ -691,4 +697,10 @@ SFML/Graphics.hpp
 -
 noise.h
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/noise.h
+vector
+-
+algorithm
+-
+
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/ui.h
 

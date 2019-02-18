@@ -21,7 +21,8 @@
 #include "tiles.h"
 
 
-
+#include "resources.h"
+#include "ui.h"
 
 // x range
 int const colNo=50;
@@ -159,7 +160,7 @@ int main(int argc, const char * argv[])
 {
     srand(time(NULL));
 
-    TileMap tMap(CIRCLE_ISLAND,colNo,rowNo,&window);
+    TileMap tMap(SQUARE_ISLAND,colNo,rowNo,&window);
 
     //SFML Setup
     window.setVerticalSyncEnabled(true);
@@ -228,7 +229,6 @@ int main(int argc, const char * argv[])
     brush.setOutlineThickness(2.0);
     brush.setOutlineColor(sf::Color::White);
 
-    sf::CircleShape shape(10);
 
 
      // run the program as long as the window is open
@@ -350,11 +350,6 @@ int main(int argc, const char * argv[])
             int secs = clock.getElapsedTime().asSeconds();
             tMap.draw(secs);
 
-
-            //shape.setRadius(10);
-            //shape.setOrigin(10,10);
-            //shape.setPosition(mouseX,mouseY);
-            //window.drawShape
 
             for(auto f=friends.begin();f!=friends.end();++f) {
                 (*f).moveToTarget();

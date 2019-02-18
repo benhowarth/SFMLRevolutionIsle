@@ -91,7 +91,13 @@
 		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/noise.h">
 			<Option target="SFMLRevolutionIsle"/>
 		</Unit>
+		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.h">
+			<Option target="SFMLRevolutionIsle"/>
+		</Unit>
 		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h">
+			<Option target="SFMLRevolutionIsle"/>
+		</Unit>
+		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/ui.h">
 			<Option target="SFMLRevolutionIsle"/>
 		</Unit>
 		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/CMakeLists.txt">

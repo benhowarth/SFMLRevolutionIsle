@@ -75,5 +75,7 @@ CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj: C:/C\ stuff/SFML-2.4.2-windows-g
 CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj: ../entities.h
 CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj: ../main.cpp
 CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj: ../noise.h
+CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj: ../resources.h
 CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj: ../tiles.h
+CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj: ../ui.h
 
