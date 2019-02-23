@@ -640,6 +640,38 @@ SFML/Config.hpp
 
 C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/WindowStyle.hpp
 
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/buildings.cpp
+buildings.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/buildings.h
+
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/buildings.h
+resources.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.h
+
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/click.cpp
+tiles.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
+entities.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.h
+click.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/click.h
+
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/click.h
+
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.cpp
+SFML/System.hpp
+-
+SFML/Window.hpp
+-
+SFML/Graphics.hpp
+-
+tiles.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
+entities.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.h
+tools.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.h
+
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.h
 SFML/System.hpp
 -
@@ -649,6 +681,8 @@ SFML/Graphics.hpp
 -
 tiles.h
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
+tools.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.h
 
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/main.cpp
 iostream
@@ -673,20 +707,58 @@ time.h
 -
 vector
 -
+tools.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.h
 tiles.h
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
 resources.h
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.h
+buildings.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/buildings.h
 ui.h
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/ui.h
+click.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/click.h
 entities.h
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.h
 
-C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/noise.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/noise.cpp
 cmath
 -
+noise.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/noise.h
+
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/noise.h
+
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.cpp
+resources.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.h
+buildings.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/buildings.h
 
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.h
+vector
+-
+entities.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.h
+tiles.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
+
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.cpp
+SFML/System.hpp
+-
+SFML/Window.hpp
+-
+SFML/Graphics.hpp
+-
+tiles.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
+vector
+-
+algorithm
+-
+cmath
+-
 
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
 SFML/System.hpp
@@ -701,6 +773,20 @@ vector
 -
 algorithm
 -
+cmath
+-
+
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.cpp
+SFML/System.hpp
+-
+SFML/Window.hpp
+-
+SFML/Graphics.hpp
+-
+cmath
+-
+
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.h
 
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/ui.h
 

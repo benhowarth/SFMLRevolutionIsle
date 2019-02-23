@@ -1,5 +1,12 @@
 file(REMOVE_RECURSE
   "CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj"
+  "CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj"
+  "CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj"
+  "CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj"
+  "CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj"
+  "CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj"
+  "CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj"
+  "CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj"
   "SFMLRevolutionIsle.pdb"
   "SFMLRevolutionIsle.exe"
   "SFMLRevolutionIsle.exe.manifest"

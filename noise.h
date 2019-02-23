@@ -5,10 +5,7 @@
 #ifndef SFMLREVOLUTIONISLE_NOISE_H
 #define SFMLREVOLUTIONISLE_NOISE_H
 
-#include <cmath>
 
-float getNoise(float x, float y){
-    return(std::sin(x*std::exp(y)+cos(y)));
-}
+float getNoise(float x, float y);
 
 #endif //SFMLREVOLUTIONISLE_NOISE_H

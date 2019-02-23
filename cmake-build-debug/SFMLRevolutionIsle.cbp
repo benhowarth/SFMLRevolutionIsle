@@ -82,19 +82,49 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/buildings.cpp">
+			<Option target="SFMLRevolutionIsle"/>
+		</Unit>
+		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/buildings.h">
+			<Option target="SFMLRevolutionIsle"/>
+		</Unit>
+		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/click.cpp">
+			<Option target="SFMLRevolutionIsle"/>
+		</Unit>
+		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/click.h">
+			<Option target="SFMLRevolutionIsle"/>
+		</Unit>
+		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.cpp">
+			<Option target="SFMLRevolutionIsle"/>
+		</Unit>
 		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.h">
 			<Option target="SFMLRevolutionIsle"/>
 		</Unit>
 		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/main.cpp">
 			<Option target="SFMLRevolutionIsle"/>
 		</Unit>
+		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/noise.cpp">
+			<Option target="SFMLRevolutionIsle"/>
+		</Unit>
 		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/noise.h">
+			<Option target="SFMLRevolutionIsle"/>
+		</Unit>
+		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.cpp">
 			<Option target="SFMLRevolutionIsle"/>
 		</Unit>
 		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.h">
 			<Option target="SFMLRevolutionIsle"/>
 		</Unit>
+		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.cpp">
+			<Option target="SFMLRevolutionIsle"/>
+		</Unit>
 		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h">
+			<Option target="SFMLRevolutionIsle"/>
+		</Unit>
+		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.cpp">
+			<Option target="SFMLRevolutionIsle"/>
+		</Unit>
+		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.h">
 			<Option target="SFMLRevolutionIsle"/>
 		</Unit>
 		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/ui.h">

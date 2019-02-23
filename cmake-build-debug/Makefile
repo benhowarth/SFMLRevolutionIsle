@@ -122,6 +122,87 @@ SFMLRevolutionIsle/fast:
 	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/build
 .PHONY : SFMLRevolutionIsle/fast
 
+buildings.obj: buildings.cpp.obj
+
+.PHONY : buildings.obj
+
+# target to build an object file
+buildings.cpp.obj:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj
+.PHONY : buildings.cpp.obj
+
+buildings.i: buildings.cpp.i
+
+.PHONY : buildings.i
+
+# target to preprocess a source file
+buildings.cpp.i:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.i
+.PHONY : buildings.cpp.i
+
+buildings.s: buildings.cpp.s
+
+.PHONY : buildings.s
+
+# target to generate assembly for a file
+buildings.cpp.s:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.s
+.PHONY : buildings.cpp.s
+
+click.obj: click.cpp.obj
+
+.PHONY : click.obj
+
+# target to build an object file
+click.cpp.obj:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj
+.PHONY : click.cpp.obj
+
+click.i: click.cpp.i
+
+.PHONY : click.i
+
+# target to preprocess a source file
+click.cpp.i:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.i
+.PHONY : click.cpp.i
+
+click.s: click.cpp.s
+
+.PHONY : click.s
+
+# target to generate assembly for a file
+click.cpp.s:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.s
+.PHONY : click.cpp.s
+
+entities.obj: entities.cpp.obj
+
+.PHONY : entities.obj
+
+# target to build an object file
+entities.cpp.obj:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj
+.PHONY : entities.cpp.obj
+
+entities.i: entities.cpp.i
+
+.PHONY : entities.i
+
+# target to preprocess a source file
+entities.cpp.i:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.i
+.PHONY : entities.cpp.i
+
+entities.s: entities.cpp.s
+
+.PHONY : entities.s
+
+# target to generate assembly for a file
+entities.cpp.s:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.s
+.PHONY : entities.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -149,6 +230,114 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+noise.obj: noise.cpp.obj
+
+.PHONY : noise.obj
+
+# target to build an object file
+noise.cpp.obj:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj
+.PHONY : noise.cpp.obj
+
+noise.i: noise.cpp.i
+
+.PHONY : noise.i
+
+# target to preprocess a source file
+noise.cpp.i:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.i
+.PHONY : noise.cpp.i
+
+noise.s: noise.cpp.s
+
+.PHONY : noise.s
+
+# target to generate assembly for a file
+noise.cpp.s:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.s
+.PHONY : noise.cpp.s
+
+resources.obj: resources.cpp.obj
+
+.PHONY : resources.obj
+
+# target to build an object file
+resources.cpp.obj:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj
+.PHONY : resources.cpp.obj
+
+resources.i: resources.cpp.i
+
+.PHONY : resources.i
+
+# target to preprocess a source file
+resources.cpp.i:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.i
+.PHONY : resources.cpp.i
+
+resources.s: resources.cpp.s
+
+.PHONY : resources.s
+
+# target to generate assembly for a file
+resources.cpp.s:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.s
+.PHONY : resources.cpp.s
+
+tiles.obj: tiles.cpp.obj
+
+.PHONY : tiles.obj
+
+# target to build an object file
+tiles.cpp.obj:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj
+.PHONY : tiles.cpp.obj
+
+tiles.i: tiles.cpp.i
+
+.PHONY : tiles.i
+
+# target to preprocess a source file
+tiles.cpp.i:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.i
+.PHONY : tiles.cpp.i
+
+tiles.s: tiles.cpp.s
+
+.PHONY : tiles.s
+
+# target to generate assembly for a file
+tiles.cpp.s:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.s
+.PHONY : tiles.cpp.s
+
+tools.obj: tools.cpp.obj
+
+.PHONY : tools.obj
+
+# target to build an object file
+tools.cpp.obj:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj
+.PHONY : tools.cpp.obj
+
+tools.i: tools.cpp.i
+
+.PHONY : tools.i
+
+# target to preprocess a source file
+tools.cpp.i:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.i
+.PHONY : tools.cpp.i
+
+tools.s: tools.cpp.s
+
+.PHONY : tools.s
+
+# target to generate assembly for a file
+tools.cpp.s:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.s
+.PHONY : tools.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -158,9 +347,30 @@ help:
 	@echo ... rebuild_cache
 	@echo ... SFMLRevolutionIsle
 	@echo ... edit_cache
+	@echo ... buildings.obj
+	@echo ... buildings.i
+	@echo ... buildings.s
+	@echo ... click.obj
+	@echo ... click.i
+	@echo ... click.s
+	@echo ... entities.obj
+	@echo ... entities.i
+	@echo ... entities.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... noise.obj
+	@echo ... noise.i
+	@echo ... noise.s
+	@echo ... resources.obj
+	@echo ... resources.i
+	@echo ... resources.s
+	@echo ... tiles.obj
+	@echo ... tiles.i
+	@echo ... tiles.s
+	@echo ... tools.obj
+	@echo ... tools.i
+	@echo ... tools.s
 .PHONY : help
 
 

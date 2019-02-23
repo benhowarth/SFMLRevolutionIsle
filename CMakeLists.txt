@@ -4,7 +4,7 @@ project(SFMLRevolutionIsle)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SFML_ROOT "C:/C Stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2")
-set(SOURCE_FILES main.cpp tiles.h entities.h noise.h resources.h ui.h)
+set(SOURCE_FILES main.cpp tiles.h entities.h noise.h resources.h ui.h resources.cpp buildings.h buildings.cpp click.cpp click.h tools.h entities.cpp noise.cpp tools.cpp tiles.cpp)
 add_executable(SFMLRevolutionIsle ${SOURCE_FILES})
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")

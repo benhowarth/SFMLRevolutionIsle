@@ -10,20 +10,11 @@
 #include <time.h>
 
 #include <vector>
-//#include <aStar.h>
 
 
 
 
-
-
-
-#include "tiles.h"
-
-
-#include "resources.h"
-#include "ui.h"
-
+#include "tools.h"
 // x range
 int const colNo=50;
 //y range
@@ -33,6 +24,8 @@ int const rowNo=40;
 
 const int screenWidth=800;
 const int screenHeight=600;
+
+
 namespace vec {
     float Length(sf::Vector2f _vec){
         float _x=_vec.x;
@@ -48,125 +41,33 @@ namespace vec {
     }
 }
 
-
 sf::RenderWindow window(sf::VideoMode(screenWidth, screenHeight), "Revolution Isle",sf::Style::Close);
 sf::View view=window.getDefaultView();
 
+#include "tiles.h"
+#include "resources.h"
+#include "buildings.h"
+#include "ui.h"
+#include "click.h"
+
+
+
+
 #include "entities.h"
-
-sf::Vector2i oldTileClick;
-void Click(int button,int _x,int _y,TileMap* tMap){
-    sf::Vector2i tileClick=(*tMap).getTileCoordsFromPos(sf::Vector2f(_x,_y),brushSize);
-    int tileId=(*tMap).getTileIdFromPos(sf::Vector2f(_x,_y),brushSize);
-    //printf("old: %f,%f vs new: %f,%f (result:%b)\n",oldTileClick.x,oldTileClick.y,tileClick.x,tileClick.y,(tileClick==oldTileClick));
-    if((_x>=0 && _x<=colNo*tileSize*scaleFactor.x) && (_y>=0 && _y<=rowNo*tileSize*scaleFactor.y) && tileId>-1 && tileId<rowNo*colNo+1) {
-
-
-
-
-        if(tileClick!=oldTileClick){
-            //printf("Click at %i,%i TILE: %f, %f (id %i)\n",_x,_y,tileClick.x,tileClick.y,tileId);
-            oldTileClick=tileClick;
-            //printf("clicked tile %f,%f\n", tileClick.x, tileClick.y);
-
-
-            for (int y = 0; y < brushSize; y++) {
-                for (int x = 0; x < brushSize; x++) {
-                    sf::Vector2i curTileCoords=tileClick;
-                    curTileCoords.x+=x;
-                    curTileCoords.y+=y;
-                    int tileId=(*tMap).getTileIdFromCoords(curTileCoords);
-                    Tile tileVal=(*(*tMap).getTileFromId(tileId)).basicTile;
-                    //Tile *tile = &tMap[(int) (((tileClick.y + y) * colNo) + tileClick.x + x)].basicTile;
-                    if(button==1) {
-                        //selectionBoxOn=false;
-                        if (brushTile == WATER) {
-                            (*tMap).updateTile(tileId,WATER);
-                        } else if (brushTile == ISLAND) {
-                            (*tMap).updateTile(tileId,ISLAND);
-                        } else if (brushTile == ROAD) {
-                            if (tileVal == ISLAND) {
-                                (*tMap).updateTile(tileId,ROAD);
-                            }
-                        } else if (brushTile == WAREHOUSE) {
-                            if (tileVal == ISLAND || tileVal == ROAD) {
-                                (*tMap).updateTile(tileId,WAREHOUSE);
-                            } else if (tileVal == WAREHOUSE) {
-                                (*tMap).updateTile(tileId,ISLAND);
-                            }
-                        } else if (brushTile == LIGHTHOUSE) {
-                            if (tileVal == ISLAND || tileVal == ROAD) {
-                                (*tMap).updateTile(tileId,LIGHTHOUSE);
-                            } else if (tileVal == LIGHTHOUSE) {
-                                (*tMap).updateTile(tileId,ISLAND);
-                            }
-                        } else if (brushTile == DOCK) {
-                            if (tileVal == WATER) {
-                                (*tMap).updateTile(tileId,DOCK);
-                            } else if (tileVal == DOCK) {
-                                (*tMap).updateTile(tileId,WATER);
-                            }
-
-                        } else if (brushTile == ROADWATER) {
-                            if (tileVal == WATER) {
-                                (*tMap).updateTile(tileId,ROADWATER);
-                            } else if (tileVal == ROADWATER) {
-                                (*tMap).updateTile(tileId,WATER);
-                            }
-                        }else if(brushTile==NILTILE) {
-                            if (!selectionBoxOn) {
-                                selectionBoxOn = true;
-                                selectionBoxStart = sf::Vector2f(_x, _y);
-                                selectionBoxEnd = sf::Vector2f(_x, _y);
-                            } else {
-                                selectionBoxEnd = sf::Vector2f(_x, _y);
-                                selectedFriends.clear();
-                                //check box
-                                for (int i = 0; i < friends.size(); i++) {
-                                    Entity *f = &friends[i];
-                                    sf::Vector2f fPos = (*f).m_pos;
-                                    if (((fPos.x > selectionBoxStart.x && fPos.x < selectionBoxEnd.x) ||
-                                         (fPos.x < selectionBoxStart.x && fPos.x > selectionBoxEnd.x))
-                                        && (fPos.y > selectionBoxStart.y && fPos.y < selectionBoxEnd.y) ||
-                                        (fPos.y < selectionBoxStart.y && fPos.y > selectionBoxEnd.y)) {
-                                        selectedFriends.push_back(i);
-                                    }
-                                }
-                            }
-                        }
-                    }else if(button==2){
-
-                        if (brushTile == NILTILE) {
-                            for (auto f = selectedFriends.begin(); f != selectedFriends.end(); ++f) {
-                                friends[*f].tryPath(tileId);
-                            }
-                        }
-
-                    }
-                }
-
-            }
-            //end of loops
-
-
-        }
-    }
-}
-
-
-
 
 int main(int argc, const char * argv[])
 {
     srand(time(NULL));
 
-    TileMap tMap(SQUARE_ISLAND,colNo,rowNo,&window);
+    TileMap tMap(TINY_ISLAND,colNo,rowNo,&window);
+    ResourceBoss res(&tMap,&friends,&enemies);
 
     //SFML Setup
     window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(60);
 
     sf::Clock clock;
+    sf::Clock deltaClock;
     sf::Font font;
     if (!font.loadFromFile("Unique.ttf"))
     {
@@ -216,14 +117,6 @@ int main(int argc, const char * argv[])
     bool running=true;
 
 
-
-    friends.push_back(Entity(&tMap));
-
-    friends.push_back(Entity(&tMap,screenWidth*0.35,screenHeight*0.35,1));
-
-    friends.push_back(Entity(&tMap,screenWidth*0.45,screenHeight*0.45,4));
-
-
     sf::RectangleShape brush(sf::Vector2f(tileSize * brushSize * scaleFactor.x, tileSize * brushSize * scaleFactor.y));
     brush.setFillColor(sf::Color::Transparent);
     brush.setOutlineThickness(2.0);
@@ -253,38 +146,44 @@ int main(int argc, const char * argv[])
                         //g.generate_grid();
                     }
                     if (event.key.code == sf::Keyboard::N) {
-
+                        newFriend(tMap);
                     }
                     if (event.key.code == sf::Keyboard::Num1) {
-                        brushTile = WATER;
+                        mouseMode=DESTROY;
+                        //brushTile = WATER;
                         brushSize = 2;
                     }
                     if (event.key.code == sf::Keyboard::Num2) {
-                        brushTile = ISLAND;
+                        //brushTile = ISLAND;
+                        mouseMode=PLACE_LAND;
                         brushSize = 2;
                     }
                     if (event.key.code == sf::Keyboard::Num3) {
-                        brushTile = ROAD;
+                        //brushTile = ROAD;
+                        mouseMode=PLACE_ROAD;
                         brushSize = 1;
                     }
                     if (event.key.code == sf::Keyboard::Num4) {
-                        brushTile = WAREHOUSE;
+                        //brushTile = WAREHOUSE;
+                        mouseMode=BUILD_WAREHOUSE;
                         brushSize = 2;
                     }
                     if (event.key.code == sf::Keyboard::Num5) {
-                        brushTile = LIGHTHOUSE;
+                        //brushTile = LIGHTHOUSE;
+                        mouseMode=BUILD_LIGHTHOUSE;
                         brushSize = 1;
-                    }
+                    }/*
                     if (event.key.code == sf::Keyboard::Num6) {
-                        brushTile = DOCK;
+                        //brushTile = DOCK;
                         brushSize = 1;
                     }
                     if (event.key.code == sf::Keyboard::Num7) {
                         brushTile = ROADWATER;
                         brushSize = 1;
-                    }
+                    }*/
                     if (event.key.code == sf::Keyboard::Num0) {
-                        brushTile = NILTILE;
+                        //brushTile = NILTILE;
+                        mouseMode=CONTROL_FRIENDS;
                         brushSize = 1;
                     }
 
@@ -347,15 +246,13 @@ int main(int argc, const char * argv[])
 
 
 
-            int secs = clock.getElapsedTime().asSeconds();
+            float secs = clock.getElapsedTime().asSeconds();
+            float dt=deltaClock.restart().asSeconds();
             tMap.draw(secs);
 
 
-            for(auto f=friends.begin();f!=friends.end();++f) {
-                (*f).moveToTarget();
-                (*f).draw(&window);
-            }
-
+            updateAndDrawFriends(secs);
+            res.updateAndDraw(window,secs,dt);
 
             //draw brush
 
@@ -395,6 +292,7 @@ int main(int argc, const char * argv[])
 
 
             std::string brushText;
+            /*
             switch (brushTile) {
                 case WATER:
                     brushText = "WATER";
@@ -419,6 +317,15 @@ int main(int argc, const char * argv[])
                     break;
                 default:
                     brushText = "UNKNOWN";
+            }*/
+            switch(mouseMode){
+                case DESTROY: brushText="DESTROY";break;
+                case PLACE_LAND: brushText="PLACE_LAND";break;
+                case PLACE_ROAD: brushText="PLACE_ROAD";break;
+                case BUILD_LIGHTHOUSE: brushText="BUILD_LIGHTHOUSE";break;
+                case BUILD_WAREHOUSE: brushText="BUILD_WAREHOUSE";break;
+                case CONTROL_FRIENDS: brushText="CONTROL_FRIENDS";break;
+                default: brushText="?";
             }
             timeText.setString(brushText + "\n" + std::to_string(clock.getElapsedTime().asSeconds()));
             timeText.setFont(font);

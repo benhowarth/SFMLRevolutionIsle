@@ -81,14 +81,203 @@ CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj.provides: CMakeFiles/SFMLRevoluti
 CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj.provides.build: CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj
 
 
+CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj: CMakeFiles/SFMLRevolutionIsle.dir/flags.make
+CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj: CMakeFiles/SFMLRevolutionIsle.dir/includes_CXX.rsp
+CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj: ../resources.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\SFMLRevolutionIsle.dir\resources.cpp.obj -c C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\resources.cpp
+
+CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\resources.cpp > CMakeFiles\SFMLRevolutionIsle.dir\resources.cpp.i
+
+CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\resources.cpp -o CMakeFiles\SFMLRevolutionIsle.dir\resources.cpp.s
+
+CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj.requires:
+
+.PHONY : CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj.requires
+
+CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj.provides: CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj.provides.build
+.PHONY : CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj.provides
+
+CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj.provides.build: CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj
+
+
+CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj: CMakeFiles/SFMLRevolutionIsle.dir/flags.make
+CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj: CMakeFiles/SFMLRevolutionIsle.dir/includes_CXX.rsp
+CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj: ../buildings.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\SFMLRevolutionIsle.dir\buildings.cpp.obj -c C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\buildings.cpp
+
+CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\buildings.cpp > CMakeFiles\SFMLRevolutionIsle.dir\buildings.cpp.i
+
+CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\buildings.cpp -o CMakeFiles\SFMLRevolutionIsle.dir\buildings.cpp.s
+
+CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj.requires:
+
+.PHONY : CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj.requires
+
+CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj.provides: CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj.provides.build
+.PHONY : CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj.provides
+
+CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj.provides.build: CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj
+
+
+CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj: CMakeFiles/SFMLRevolutionIsle.dir/flags.make
+CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj: CMakeFiles/SFMLRevolutionIsle.dir/includes_CXX.rsp
+CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj: ../click.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\SFMLRevolutionIsle.dir\click.cpp.obj -c C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\click.cpp
+
+CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\click.cpp > CMakeFiles\SFMLRevolutionIsle.dir\click.cpp.i
+
+CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\click.cpp -o CMakeFiles\SFMLRevolutionIsle.dir\click.cpp.s
+
+CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj.requires:
+
+.PHONY : CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj.requires
+
+CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj.provides: CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj.provides.build
+.PHONY : CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj.provides
+
+CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj.provides.build: CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj
+
+
+CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj: CMakeFiles/SFMLRevolutionIsle.dir/flags.make
+CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj: CMakeFiles/SFMLRevolutionIsle.dir/includes_CXX.rsp
+CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj: ../entities.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\SFMLRevolutionIsle.dir\entities.cpp.obj -c C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\entities.cpp
+
+CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\entities.cpp > CMakeFiles\SFMLRevolutionIsle.dir\entities.cpp.i
+
+CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\entities.cpp -o CMakeFiles\SFMLRevolutionIsle.dir\entities.cpp.s
+
+CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj.requires:
+
+.PHONY : CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj.requires
+
+CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj.provides: CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj.provides.build
+.PHONY : CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj.provides
+
+CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj.provides.build: CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj
+
+
+CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj: CMakeFiles/SFMLRevolutionIsle.dir/flags.make
+CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj: CMakeFiles/SFMLRevolutionIsle.dir/includes_CXX.rsp
+CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj: ../noise.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\SFMLRevolutionIsle.dir\noise.cpp.obj -c C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\noise.cpp
+
+CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\noise.cpp > CMakeFiles\SFMLRevolutionIsle.dir\noise.cpp.i
+
+CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\noise.cpp -o CMakeFiles\SFMLRevolutionIsle.dir\noise.cpp.s
+
+CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj.requires:
+
+.PHONY : CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj.requires
+
+CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj.provides: CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj.provides.build
+.PHONY : CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj.provides
+
+CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj.provides.build: CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj
+
+
+CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj: CMakeFiles/SFMLRevolutionIsle.dir/flags.make
+CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj: CMakeFiles/SFMLRevolutionIsle.dir/includes_CXX.rsp
+CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj: ../tools.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\SFMLRevolutionIsle.dir\tools.cpp.obj -c C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\tools.cpp
+
+CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\tools.cpp > CMakeFiles\SFMLRevolutionIsle.dir\tools.cpp.i
+
+CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\tools.cpp -o CMakeFiles\SFMLRevolutionIsle.dir\tools.cpp.s
+
+CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj.requires:
+
+.PHONY : CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj.requires
+
+CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj.provides: CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj.provides.build
+.PHONY : CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj.provides
+
+CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj.provides.build: CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj
+
+
+CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj: CMakeFiles/SFMLRevolutionIsle.dir/flags.make
+CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj: CMakeFiles/SFMLRevolutionIsle.dir/includes_CXX.rsp
+CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj: ../tiles.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\SFMLRevolutionIsle.dir\tiles.cpp.obj -c C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\tiles.cpp
+
+CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\tiles.cpp > CMakeFiles\SFMLRevolutionIsle.dir\tiles.cpp.i
+
+CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-6~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\tiles.cpp -o CMakeFiles\SFMLRevolutionIsle.dir\tiles.cpp.s
+
+CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj.requires:
+
+.PHONY : CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj.requires
+
+CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj.provides: CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj.provides.build
+.PHONY : CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj.provides
+
+CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj.provides.build: CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj
+
+
 # Object files for target SFMLRevolutionIsle
 SFMLRevolutionIsle_OBJECTS = \
-"CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj"
+"CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj" \
+"CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj" \
+"CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj" \
+"CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj" \
+"CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj" \
+"CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj" \
+"CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj" \
+"CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj"
 
 # External object files for target SFMLRevolutionIsle
 SFMLRevolutionIsle_EXTERNAL_OBJECTS =
 
 SFMLRevolutionIsle.exe: CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj
+SFMLRevolutionIsle.exe: CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj
+SFMLRevolutionIsle.exe: CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj
+SFMLRevolutionIsle.exe: CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj
+SFMLRevolutionIsle.exe: CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj
+SFMLRevolutionIsle.exe: CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj
+SFMLRevolutionIsle.exe: CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj
+SFMLRevolutionIsle.exe: CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj
 SFMLRevolutionIsle.exe: CMakeFiles/SFMLRevolutionIsle.dir/build.make
 SFMLRevolutionIsle.exe: C:/C\ stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/lib/libsfml-system-d.a
 SFMLRevolutionIsle.exe: C:/C\ stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/lib/libsfml-window-d.a
@@ -98,7 +287,7 @@ SFMLRevolutionIsle.exe: C:/C\ stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SF
 SFMLRevolutionIsle.exe: CMakeFiles/SFMLRevolutionIsle.dir/linklibs.rsp
 SFMLRevolutionIsle.exe: CMakeFiles/SFMLRevolutionIsle.dir/objects1.rsp
 SFMLRevolutionIsle.exe: CMakeFiles/SFMLRevolutionIsle.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable SFMLRevolutionIsle.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Ben\CLionProjects\SFMLRevolutionIsle\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable SFMLRevolutionIsle.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\SFMLRevolutionIsle.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -107,6 +296,13 @@ CMakeFiles/SFMLRevolutionIsle.dir/build: SFMLRevolutionIsle.exe
 .PHONY : CMakeFiles/SFMLRevolutionIsle.dir/build
 
 CMakeFiles/SFMLRevolutionIsle.dir/requires: CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj.requires
+CMakeFiles/SFMLRevolutionIsle.dir/requires: CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj.requires
+CMakeFiles/SFMLRevolutionIsle.dir/requires: CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj.requires
+CMakeFiles/SFMLRevolutionIsle.dir/requires: CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj.requires
+CMakeFiles/SFMLRevolutionIsle.dir/requires: CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj.requires
+CMakeFiles/SFMLRevolutionIsle.dir/requires: CMakeFiles/SFMLRevolutionIsle.dir/noise.cpp.obj.requires
+CMakeFiles/SFMLRevolutionIsle.dir/requires: CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj.requires
+CMakeFiles/SFMLRevolutionIsle.dir/requires: CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj.requires
 
 .PHONY : CMakeFiles/SFMLRevolutionIsle.dir/requires
 
