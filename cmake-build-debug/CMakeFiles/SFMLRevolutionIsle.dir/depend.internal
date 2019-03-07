@@ -80,6 +80,7 @@ CMakeFiles/SFMLRevolutionIsle.dir/buildings.cpp.obj
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.h
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/ui.h
 CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Config.hpp
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics.hpp
@@ -152,12 +153,15 @@ CMakeFiles/SFMLRevolutionIsle.dir/click.cpp.obj
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/Window.hpp
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/WindowHandle.hpp
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/WindowStyle.hpp
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/buildings.h
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/click.cpp
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/click.h
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.h
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/noise.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.h
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/ui.h
 CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Config.hpp
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics.hpp
@@ -230,11 +234,14 @@ CMakeFiles/SFMLRevolutionIsle.dir/entities.cpp.obj
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/Window.hpp
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/WindowHandle.hpp
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/WindowStyle.hpp
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/buildings.h
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.cpp
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.h
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/noise.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.h
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/ui.h
 CMakeFiles/SFMLRevolutionIsle.dir/main.cpp.obj
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Config.hpp
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics.hpp
@@ -398,6 +405,7 @@ CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.h
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/ui.h
 CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Config.hpp
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics.hpp
@@ -546,3 +554,84 @@ CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/WindowHandle.hpp
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/WindowStyle.hpp
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.cpp
+CMakeFiles/SFMLRevolutionIsle.dir/ui.cpp.obj
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Config.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/BlendMode.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/CircleShape.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Color.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/ConvexShape.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Drawable.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Export.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Font.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Glsl.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Glsl.inl
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Glyph.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Image.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/PrimitiveType.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Rect.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Rect.inl
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/RectangleShape.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/RenderStates.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/RenderTarget.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/RenderTexture.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/RenderWindow.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Shader.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Shape.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Sprite.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Text.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Texture.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Transform.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Transformable.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/Vertex.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/VertexArray.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics/View.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/Clock.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/Err.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/Export.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/FileInputStream.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/InputStream.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/Lock.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/MemoryInputStream.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/Mutex.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/NonCopyable.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/Sleep.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/String.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/String.inl
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/Thread.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/Thread.inl
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/ThreadLocal.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/ThreadLocalPtr.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/ThreadLocalPtr.inl
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/Time.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/Utf.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/Utf.inl
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/Vector2.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/Vector2.inl
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/Vector3.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/System/Vector3.inl
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/Context.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/ContextSettings.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/Event.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/Export.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/GlResource.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/Joystick.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/Keyboard.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/Mouse.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/Sensor.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/Touch.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/VideoMode.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/Window.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/WindowHandle.hpp
+ C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/WindowStyle.hpp
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/buildings.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/click.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/noise.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/ui.cpp
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/ui.h

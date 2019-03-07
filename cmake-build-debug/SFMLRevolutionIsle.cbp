@@ -127,6 +127,9 @@
 		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.h">
 			<Option target="SFMLRevolutionIsle"/>
 		</Unit>
+		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/ui.cpp">
+			<Option target="SFMLRevolutionIsle"/>
+		</Unit>
 		<Unit filename="C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/ui.h">
 			<Option target="SFMLRevolutionIsle"/>
 		</Unit>

@@ -39,11 +39,13 @@ enum Tile{
 
 extern int tileWeights[];
 extern const std::vector<Tile> tMask_island_general;
+extern const std::vector<Tile> tMask_island;
 extern const std::vector<Tile> tMask_island_roads;
 extern const std::vector<Tile> tMask_roads;
 extern const std::vector<Tile> tMask_water;
 extern const std::vector<Tile> tMask_land;
 extern const std::vector<Tile> tMask_meteor;
+extern const std::vector<Tile> tMask_all;
 
 
 
@@ -61,12 +63,14 @@ struct TileStruct{
     int cost;
     //TileStruct* parent=nullptr;
     int parent=-1;
+    int id;
     int costSoFar=NODE_MAX_COST*NODE_MAX_COST*1000;
     //std::vector<TileStruct*> ns;
     std::vector<int> ns;
     bool visited=false;
-    TileStruct(Tile t_basicTile){
+    TileStruct(Tile t_basicTile,int t_id){
         basicTile=t_basicTile;
+        id=t_id;
     }
 
 };
@@ -117,8 +121,12 @@ public:
 
     void generateIsland(IslandType t_islandToMake);
 
+    bool areaIsOnly(sf::Vector2i &t_coords,int t_brushSize,std::vector<Tile> const &mask);
+
 
     sf::Vector2i getTileCoordsFromId(int t_id);
+
+    sf::Vector2i getTilePosFromId(int t_id);
 
     int getTileIdFromCoords(sf::Vector2i t_coords);
     TileStruct* getTileFromCoords(sf::Vector2i t_coords);
@@ -129,12 +137,21 @@ public:
 
     int getTileIdFromPos(sf::Vector2f t_pos, int t_brushSize);
 
+    TileStruct* getTileFromPos(sf::Vector2f t_pos, int t_brushSize);
+
     int getBitmaskFromTileId(int t_id, std::vector<Tile> t_mask);
 
     void resetTile(int t_id);
 
     void resetTiles();
 
+    int getMiddleTileId();
+
+    sf::Vector2i getMiddleTileCoords();
+
+    sf::Vector2i getMiddleTilePos();
+
+    sf::Vector2i getNearestTileAt(const sf::Vector2f &t_pos,const Tile &t_tile);
 
     void updateTile(int t_id);
 
@@ -149,7 +166,7 @@ public:
     float getH(int t_id, int t_idStart, int t_idEnd);
 
 
-    std::vector<int> getPath(int t_idStart,int t_idEnd,std::vector<Tile> t_mask);
+    std::vector<int> getPath(int t_idStart,int t_idEnd,std::vector<Tile> const* t_mask);
 
 };
 

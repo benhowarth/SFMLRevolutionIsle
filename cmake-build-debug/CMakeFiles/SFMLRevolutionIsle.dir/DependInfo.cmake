@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.cpp" "C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/cmake-build-debug/CMakeFiles/SFMLRevolutionIsle.dir/resources.cpp.obj"
   "C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.cpp" "C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/cmake-build-debug/CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj"
   "C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.cpp" "C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/cmake-build-debug/CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj"
+  "C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/ui.cpp" "C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/cmake-build-debug/CMakeFiles/SFMLRevolutionIsle.dir/ui.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

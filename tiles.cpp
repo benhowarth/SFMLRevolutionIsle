@@ -21,13 +21,15 @@
 int tileMapNoX,tileMapNoY;
 sf::Sprite tile;
 
-int tileWeights[]={1000,500,5,100,100,5,5};
+int tileWeights[]={5000,500,5,100,100,5,5};
 const std::vector<Tile> tMask_island_general={ISLAND,ROAD,WAREHOUSE,LIGHTHOUSE,METEOR};
+const std::vector<Tile> tMask_island={ISLAND};
 const std::vector<Tile> tMask_island_roads={ISLAND,ROAD,ROADWATER};
 const std::vector<Tile> tMask_roads={ROAD,ROADWATER};
 const std::vector<Tile> tMask_water={WATER};
 const std::vector<Tile> tMask_land={ISLAND,ROAD,WAREHOUSE,LIGHTHOUSE,DOCK,ROADWATER,METEOR};
 const std::vector<Tile> tMask_meteor={METEOR};
+const std::vector<Tile> tMask_all={WATER,ISLAND,ROAD,WAREHOUSE,LIGHTHOUSE,DOCK,ROADWATER,METEOR};
 
 
 
@@ -43,9 +45,9 @@ void TileMap::generateIsland(IslandType t_islandToMake) {
             sf::Vector2i coords = sf::Vector2i(i % m_colNo, i / m_colNo);
             if ((coords.x < islandBuffer) || (coords.x > (m_colNo - 1) - islandBuffer) ||
                 (coords.y < islandBuffer) || (coords.y > (m_rowNo - 1) - islandBuffer)) {
-                m_tiles.emplace_back(WATER);
+                m_tiles.emplace_back(WATER,i);
             } else {
-                m_tiles.emplace_back(ISLAND);
+                m_tiles.emplace_back(ISLAND,i);
             }
         }
     } else if (t_islandToMake == CIRCLE_ISLAND) {
@@ -55,9 +57,9 @@ void TileMap::generateIsland(IslandType t_islandToMake) {
             coords.x -= (m_colNo / 2);
             coords.y -= (m_rowNo / 2);
             if ((coords.x * coords.x + coords.y * coords.y) > islandRad * islandRad) {
-                m_tiles.emplace_back(WATER);
+                m_tiles.emplace_back(WATER,i);
             } else {
-                m_tiles.emplace_back(ISLAND);
+                m_tiles.emplace_back(ISLAND,i);
             }
         }
     } else if (t_islandToMake == TINY_ISLAND) {
@@ -67,9 +69,9 @@ void TileMap::generateIsland(IslandType t_islandToMake) {
             sf::Vector2i coords = sf::Vector2i(((i % m_colNo)/brushSize)*brushSize, (i / m_colNo/brushSize)*brushSize);
 
             if((coords.x<=(m_colNo/2)+islandSize) && (coords.x>=(m_colNo/2)-islandSize) && (coords.y<=(m_rowNo/2)+islandSize) && (coords.y>=(m_rowNo/2)-islandSize)){
-                m_tiles.emplace_back(ISLAND);
+                m_tiles.emplace_back(ISLAND,i);
             }else {
-                m_tiles.emplace_back(WATER);
+                m_tiles.emplace_back(WATER,i);
             }
         }
         sf::Vector2i c=sf::Vector2i(brushSize*((m_colNo/brushSize)/2),brushSize*((m_rowNo/brushSize)/2));
@@ -77,7 +79,7 @@ void TileMap::generateIsland(IslandType t_islandToMake) {
             sf::Vector2i coords = sf::Vector2i(i % brushSize, i / brushSize);
             coords.x=coords.x+c.x;
             coords.y=coords.y+c.y;
-            m_tiles[coords.x+coords.y*m_colNo]=TileStruct(METEOR);
+            m_tiles[coords.x+coords.y*m_colNo]=TileStruct(METEOR,coords.x+coords.y*m_colNo);
         }
 
     } else if (t_islandToMake == NOISE_ISLAND) {
@@ -88,9 +90,9 @@ void TileMap::generateIsland(IslandType t_islandToMake) {
             coords.y -= (m_rowNo / 2);
             if ((coords.x * coords.x + coords.y * coords.y) > islandRad * islandRad &&
                 getNoise(coords.x, coords.y) > 0.6) {
-                m_tiles.emplace_back(WATER);
+                m_tiles.emplace_back(WATER,i);
             } else {
-                m_tiles.emplace_back(ISLAND);
+                m_tiles.emplace_back(ISLAND,i);
             }
         }
     }
@@ -102,8 +104,29 @@ void TileMap::generateIsland(IslandType t_islandToMake) {
 }
 
 
+bool TileMap::areaIsOnly(sf::Vector2i &t_coords,int t_brushSize,std::vector<Tile> const &mask){
+    for(int x=0;x<t_brushSize;x++){
+        for(int y=0;y<t_brushSize;y++){
+            Tile &curTile=getTileFromCoords(sf::Vector2i(t_coords.x+x,t_coords.y+y))->basicTile;
+            for(auto &m: mask) {
+                if (curTile!=m) {
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+
 sf::Vector2i TileMap::getTileCoordsFromId(int t_id) {
     return sf::Vector2i(t_id % m_colNo, t_id / m_colNo);
+}
+
+sf::Vector2i TileMap::getTilePosFromId(int t_id) {
+    sf::Vector2i coords=getTileCoordsFromId(t_id);
+    coords.x*=tileSize*scaleFactor.x;
+    coords.y*=tileSize*scaleFactor.y;
+    return coords;
 }
 
 int TileMap::getTileIdFromCoords(sf::Vector2i t_coords) {
@@ -133,6 +156,10 @@ TileStruct* TileMap::getTileFromId(int t_id) {
 
 int TileMap::getTileIdFromPos(sf::Vector2f t_pos, int t_brushSize) {
     return getTileIdFromCoords(getTileCoordsFromPos(t_pos, t_brushSize));
+}
+
+TileStruct* TileMap::getTileFromPos(sf::Vector2f t_pos, int t_brushSize) {
+    return getTileFromCoords(getTileCoordsFromPos(t_pos, t_brushSize));
 }
 
 int TileMap::getBitmaskFromTileId(int t_id, std::vector<Tile> t_mask) {
@@ -173,6 +200,38 @@ void TileMap::resetTiles() {
 }
 
 
+int TileMap::getMiddleTileId() {
+    //printf("MIDDLE TILE ID %i\n", ((m_colNo/2)+((m_rowNo/2)*m_colNo)));
+    return ((m_colNo/2)+((m_rowNo/2)*m_colNo));
+}
+
+sf::Vector2i TileMap::getMiddleTileCoords(){
+    return getTileCoordsFromId(getMiddleTileId());
+};
+
+sf::Vector2i TileMap::getMiddleTilePos(){
+    return getTilePosFromId(getMiddleTileId());
+};
+
+sf::Vector2i TileMap::getNearestTileAt(const sf::Vector2f &t_pos,const Tile &t_tile){
+    TileStruct* tile=getTileFromId(getTileIdFromPos(t_pos,1));
+    std::vector<TileStruct*> toCheck;
+    while(tile->basicTile!=t_tile){
+        for(int n:tile->ns){
+            TileStruct* neighbour=getTileFromId(n);
+            if(!neighbour->visited){
+                neighbour->visited=true;
+                toCheck.push_back(neighbour);
+            }
+        }
+        tile=toCheck.back();
+        toCheck.pop_back();
+    }
+    resetTiles();
+    return getTilePosFromId(tile->id);
+}
+
+
 void TileMap::updateTile(int t_id) {
     TileStruct *t = &m_tiles[t_id];
     //update ns
@@ -188,6 +247,17 @@ void TileMap::updateTile(int t_id) {
             (*t).ns.push_back(getTileIdFromCoords(nCoords));
         }
     }
+    /*
+    for (int i = 0; i < 4; i++) {
+        sf::Vector2i nCoords = coords;
+        nCoords.x += movesManhattan[i][0];
+        nCoords.y += movesManhattan[i][1];
+
+        if (nCoords.x > -1 && nCoords.x < m_colNo && nCoords.y > -1 && nCoords.y < m_rowNo) {
+            (*t).ns.push_back(getTileIdFromCoords(nCoords));
+        }
+    }
+     */
 
     //update cost
     (*t).cost = tileWeights[t->basicTile];
@@ -571,7 +641,7 @@ float TileMap::getH(int t_id, int t_idStart, int t_idEnd) {
 }
 
 
-std::vector<int> TileMap::getPath(int t_idStart,int t_idEnd,std::vector<Tile> t_mask){
+std::vector<int> TileMap::getPath(int t_idStart,int t_idEnd,std::vector<Tile> const* t_mask){
     sf::Vector2i startCoords=getTileCoordsFromId(t_idStart);
     sf::Vector2i endCoords=getTileCoordsFromId(t_idEnd);
 
@@ -580,7 +650,8 @@ std::vector<int> TileMap::getPath(int t_idStart,int t_idEnd,std::vector<Tile> t_
     toVisit.push_back(t_idStart);
     m_tiles[t_idStart].visited=true;
     m_tiles[t_idStart].costSoFar=0;
-    while(!toVisit.empty()){
+    int id=t_idStart;
+    while(!toVisit.empty() && id!=t_idEnd){
 
 
         int id=toVisit.back();
@@ -600,7 +671,7 @@ std::vector<int> TileMap::getPath(int t_idStart,int t_idEnd,std::vector<Tile> t_
         }
 
 
-        sf::Vector2i coords=getTileCoordsFromId(id);
+        //sf::Vector2i coords=getTileCoordsFromId(id);
         m_tiles[id].visited=true;
 
         toVisit.pop_back();
@@ -610,9 +681,9 @@ std::vector<int> TileMap::getPath(int t_idStart,int t_idEnd,std::vector<Tile> t_
             int n=ns[i];
             if(!(m_tiles[n].visited)){
                 bool maskOk=false;
-                for(int j=0;j<t_mask.size();j++) {
+                for(int j=0;j<t_mask->size();j++) {
                     //check if in mask
-                    if(m_tiles[n].basicTile==t_mask[j]) {
+                    if(m_tiles[n].basicTile==(*t_mask)[j]) {
                         //if so break
                         maskOk=true;
                         break;
@@ -642,7 +713,7 @@ std::vector<int> TileMap::getPath(int t_idStart,int t_idEnd,std::vector<Tile> t_
     pathRes.push_back(t_idEnd);
     while(nodePar!=t_idStart){
         if(nodePar==-1){
-            printf("No path found!\n");
+            //printf("No path found!\n");
             pathRes.clear();
             break;
         }

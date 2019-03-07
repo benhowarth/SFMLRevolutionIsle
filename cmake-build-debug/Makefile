@@ -338,6 +338,33 @@ tools.cpp.s:
 	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.s
 .PHONY : tools.cpp.s
 
+ui.obj: ui.cpp.obj
+
+.PHONY : ui.obj
+
+# target to build an object file
+ui.cpp.obj:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/ui.cpp.obj
+.PHONY : ui.cpp.obj
+
+ui.i: ui.cpp.i
+
+.PHONY : ui.i
+
+# target to preprocess a source file
+ui.cpp.i:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/ui.cpp.i
+.PHONY : ui.cpp.i
+
+ui.s: ui.cpp.s
+
+.PHONY : ui.s
+
+# target to generate assembly for a file
+ui.cpp.s:
+	$(MAKE) -f CMakeFiles\SFMLRevolutionIsle.dir\build.make CMakeFiles/SFMLRevolutionIsle.dir/ui.cpp.s
+.PHONY : ui.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -371,6 +398,9 @@ help:
 	@echo ... tools.obj
 	@echo ... tools.i
 	@echo ... tools.s
+	@echo ... ui.obj
+	@echo ... ui.i
+	@echo ... ui.s
 .PHONY : help
 
 
