@@ -5,10 +5,13 @@
 #ifndef SFMLREVOLUTIONISLE_BUILDINGS_H
 #define SFMLREVOLUTIONISLE_BUILDINGS_H
 
+#include "tiles.h"
 #include "resources.h"
 #include "entities.h"
 #include "tools.h"
 #include "ui.h"
+
+struct TileStruct;
 
 class ResourceBoss;
 class Entity;
@@ -32,6 +35,7 @@ public:
 
 class Building{
 public:
+    bool m_disabled=false;
     TileStruct* m_tileParent;
     sf::Vector2i m_pos;
     sf::Vector2i m_coords;
@@ -104,6 +108,23 @@ public:
         m_buildSpeed=0.3;
         m_timeInterval=10;
         m_timeUpgrade=0.8;
+    };
+    void draw(sf::RenderWindow &win);
+
+    float getTimeInterval();
+    void doAction();
+    void personalUpdate(float &time,float &dTime);
+};
+
+class Rocket:public Building{
+public:
+    float m_rocketSpeed=2;
+    float m_alpha=255;
+    static constexpr float cost=0;
+    Rocket(TileStruct* t_tileParent,sf::Vector2i t_pos,sf::Vector2i t_coords,ResourceBoss* t_res):Building(t_tileParent,t_pos,t_coords,t_res){
+        m_buildSpeed=1;
+        m_timeInterval=0.2;
+        m_timeUpgrade=0;
     };
     void draw(sf::RenderWindow &win);
 

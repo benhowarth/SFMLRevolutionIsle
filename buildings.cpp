@@ -149,6 +149,54 @@ void Warehouse::personalUpdate(float &time, float &dTime) {
 
 }
 
+
+
+
+void Rocket::draw(sf::RenderWindow &win){
+
+    sf::CircleShape shape(tileSize);
+    shape.setPosition(sf::Vector2f(m_pos));
+    sf::Color col=sf::Color::Yellow;
+    if(m_disabled && m_alpha>0){
+        m_alpha-=3;
+    }
+    if(m_alpha<0){m_alpha=0;}
+    col=sf::Color(col.r,col.g,col.b,m_alpha);
+    shape.setFillColor(col);
+    shape.setOrigin(tileSize/2,tileSize/2);
+    shape.setRadius(tileSize);
+    win.draw(shape);
+};
+
+void Rocket::doAction(){
+    /*
+    if(inhabitants.size()>0){
+        inhabitants[0]->getSaved();
+        inhabitants[0]->detachFromBuilding();
+        m_disabled=true;
+    }
+     */
+};
+
+float Rocket::getTimeInterval() {
+    return m_timeInterval;
+}
+
+void Rocket::personalUpdate(float &time, float &dTime) {
+    if(m_disabled){
+        m_pos.y-=m_rocketSpeed*dTime;
+    }else{
+        if(inhabitants.size()>0){
+            //printf("rocket save\n");
+            inhabitants[0]->save();
+            inhabitants[0]->detachFromBuilding();
+            m_disabled=true;
+        }
+    }
+
+}
+
+
 void Building::doAction() {
     printf("Building %i,%i does work!\n", m_coords.x, m_coords.y);
 };
@@ -156,17 +204,19 @@ void Building::doAction() {
 void Building::update(float &time,float &dTime){
     //check if built
     if(enemies.size()>0) {
-        if (m_percentageBuilt + dTime < 1) {
-            m_percentageBuilt += m_buildSpeed * dTime;
-        } else if (m_percentageBuilt + dTime > 1 && m_percentageBuilt != 1) {
-            m_percentageBuilt = 1;
-            m_res->ui->addPopup(m_pos.x, m_pos.y, "DONE!", sf::Color::White);
-            m_showUI = false;
-        } else {
-            if (m_timer > getTimeInterval()) {
-                doAction();
+        if(!m_disabled){
+            if (m_percentageBuilt + dTime < 1) {
+                m_percentageBuilt += m_buildSpeed * dTime;
+            } else if (m_percentageBuilt + dTime > 1 && m_percentageBuilt != 1) {
+                m_percentageBuilt = 1;
+                m_res->ui->addPopup(m_pos.x, m_pos.y, "DONE!", sf::Color::White);
+                m_showUI = false;
             } else {
-                m_timer += dTime;
+                if (m_timer > getTimeInterval()) {
+                    doAction();
+                } else {
+                    m_timer += dTime;
+                }
             }
         }
         personalUpdate(time, dTime);

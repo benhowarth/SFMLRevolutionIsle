@@ -477,9 +477,15 @@ CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj: C:/C\ stuff/SFML-2.4.2-windows-
 CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj: C:/C\ stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/Window.hpp
 CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj: C:/C\ stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/WindowHandle.hpp
 CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj: C:/C\ stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/WindowStyle.hpp
+CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj: ../buildings.h
+CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj: ../click.h
+CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj: ../entities.h
 CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj: ../noise.h
+CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj: ../resources.h
 CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj: ../tiles.cpp
 CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj: ../tiles.h
+CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj: ../tools.h
+CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj: ../ui.h
 
 CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj: C:/C\ stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Config.hpp
 CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj: C:/C\ stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics.hpp

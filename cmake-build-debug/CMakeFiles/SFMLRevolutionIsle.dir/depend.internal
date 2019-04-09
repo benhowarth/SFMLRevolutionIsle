@@ -478,9 +478,15 @@ CMakeFiles/SFMLRevolutionIsle.dir/tiles.cpp.obj
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/Window.hpp
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/WindowHandle.hpp
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Window/WindowStyle.hpp
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/buildings.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/click.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.h
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/noise.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.h
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.cpp
  C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.h
+ C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/ui.h
 CMakeFiles/SFMLRevolutionIsle.dir/tools.cpp.obj
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Config.hpp
  C:/C stuff/SFML-2.4.2-windows-gcc-6.1.0-mingw-32-bit/SFML-2.4.2/include/SFML/Graphics.hpp

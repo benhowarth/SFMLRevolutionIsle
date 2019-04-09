@@ -651,6 +651,8 @@ entities.h
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/entities.h
 
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/buildings.h
+tiles.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
 resources.h
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.h
 entities.h
@@ -708,6 +710,8 @@ SFML/System.hpp
 SFML/Window.hpp
 -
 SFML/Graphics.hpp
+-
+cmath
 -
 tiles.h
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
@@ -795,6 +799,12 @@ SFML/Graphics.hpp
 -
 tiles.h
 C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tiles.h
+tools.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/tools.h
+resources.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/resources.h
+click.h
+C:/Users/Ben/CLionProjects/SFMLRevolutionIsle/click.h
 vector
 -
 algorithm

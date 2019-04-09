@@ -12,6 +12,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "noise.h"
+//#include "resources.h"
 
 #include<vector>
 #include<algorithm>
@@ -20,6 +21,8 @@
 
 #define NODE_MAX_COST 500
 
+
+class ResourceBoss;
 
 
 extern int tileMapNoX,tileMapNoY;
@@ -106,20 +109,11 @@ private:
 public:
     int m_colNo;
     int m_rowNo;
-    TileMap(int t_colNo, int t_rowNo, sf::RenderWindow *t_win) {
-        TileMap(SQUARE_ISLAND, t_colNo, t_rowNo, t_win);
-    }
 
-    TileMap(IslandType t_islandToMake, int t_colNo, int t_rowNo, sf::RenderWindow *t_win) {
-        m_colNo = t_colNo;
-        m_rowNo = t_rowNo;
-        m_win = t_win;
-        m_tiles.reserve(m_colNo * m_rowNo);
-        generateIsland(t_islandToMake);
-    }
+    TileMap(int t_colNo, int t_rowNo, sf::RenderWindow *t_win);
 
 
-    void generateIsland(IslandType t_islandToMake);
+    void generateIsland(IslandType t_islandToMake,ResourceBoss* t_res);
 
     bool areaIsOnly(sf::Vector2i &t_coords,int t_brushSize,std::vector<Tile> const &mask);
 
@@ -151,7 +145,7 @@ public:
 
     sf::Vector2i getMiddleTilePos();
 
-    sf::Vector2i getNearestTileAt(const sf::Vector2f &t_pos,const Tile &t_tile);
+    TileStruct* getNearestTileAt(const sf::Vector2f &t_pos,const Tile &t_tile);
 
     void updateTile(int t_id);
 

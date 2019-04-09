@@ -17,6 +17,7 @@ extern int const rowNo;
 
 extern int const ISLAND_PRICE;
 
+extern bool inControl;
 
 extern int const screenWidth;
 extern int const screenHeight;

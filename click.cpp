@@ -12,7 +12,7 @@
 #include "resources.h"
 
 sf::Vector2i oldTileClick;
-MouseMode mouseMode=PLACE_LAND;
+MouseMode mouseMode=DESTROY;
 
 void drawBrush(Tile tileToDraw,int brushSize,TileMap* tMap,sf::Vector2i tileClick){
     for (int y = 0; y < brushSize; y++) {
@@ -33,30 +33,60 @@ void drawBrush(Tile tileToDraw,int brushSize,TileMap* tMap,sf::Vector2i tileClic
 }
 
 void Click(int button,int _x,int _y,TileMap* tMap,ResourceBoss* res){
-    int tileId=(*tMap).getTileIdFromPos(sf::Vector2f(_x,_y),brushSize);
+    int tileId = (*tMap).getTileIdFromPos(sf::Vector2f(_x, _y), brushSize);
     //printf("old: %f,%f vs new: %f,%f (result:%b)\n",oldTileClick.x,oldTileClick.y,tileClick.x,tileClick.y,(tileClick==oldTileClick));
-    int colNo=tMap->m_colNo;
-    int rowNo=tMap->m_rowNo;
-    if((_x>=0 && _x<=colNo*tileSize*scaleFactor.x) && (_y>=0 && _y<=rowNo*tileSize*scaleFactor.y) && tileId>-1 && tileId<rowNo*colNo+1) {
-        sf::Vector2i tileClick=tMap->getTileCoordsFromPos(sf::Vector2f(_x,_y),brushSize);
+    int colNo = tMap->m_colNo;
+    int rowNo = tMap->m_rowNo;
+    if(mouseMode==CONTROL_FRIENDS){
+        if (button == 1) {
+
+
+            if (!selectionBoxOn) {
+                selectionBoxOn = true;
+                selectionBoxStart = sf::Vector2f(_x, _y);
+                selectionBoxEnd = sf::Vector2f(_x, _y);
+            } else {
+                selectionBoxEnd = sf::Vector2f(_x, _y);
+                selectedFriends.clear();
+                //check box
+                for (int i = 0; i < friends.size(); i++) {
+                    Entity *f = &friends[i];
+                    sf::Vector2f fPos = f->m_pos;
+                    if (((fPos.x > selectionBoxStart.x && fPos.x < selectionBoxEnd.x) ||
+                         (fPos.x < selectionBoxStart.x && fPos.x > selectionBoxEnd.x))
+                        && ((fPos.y > selectionBoxStart.y && fPos.y < selectionBoxEnd.y) ||
+                        (fPos.y < selectionBoxStart.y && fPos.y > selectionBoxEnd.y))
+                        && !f->getSaved()) {
+                        selectedFriends.push_back(i);
+                    }
+                }
+            }
+
+
+        }
+    }
+    if ((_x >= 0 && _x <= colNo * tileSize * scaleFactor.x) &&
+        (_y >= 0 && _y <= rowNo * tileSize * scaleFactor.y) && tileId > -1 && tileId < rowNo * colNo + 1) {
+        sf::Vector2i tileClick = tMap->getTileCoordsFromPos(sf::Vector2f(_x, _y), brushSize);
 
         Tile tileVal = tMap->getTileFromId(tileId)->basicTile;
 
 
-
-        if(tileClick!=oldTileClick){
+        if (tileClick != oldTileClick) {
             //printf("Click at %i,%i TILE: %f, %f (id %i)\n",_x,_y,tileClick.x,tileClick.y,tileId);
-            oldTileClick=tileClick;
+            oldTileClick = tileClick;
             //printf("clicked tile %f,%f\n", tileClick.x, tileClick.y);
 
             //getting if there is any other tile than island in a 2x2 grid from this coord
-            bool justIsland=tMap->areaIsOnly(tileClick,2,tMask_island);
-            bool justWater=tMap->areaIsOnly(tileClick,2,tMask_water);
-            if(button==2){
+            bool justIsland = tMap->areaIsOnly(tileClick, 2, tMask_island);
+            bool justWater = tMap->areaIsOnly(tileClick, 2, tMask_water);
+            if (button == 2) {
                 for (auto f = selectedFriends.begin(); f != selectedFriends.end(); ++f) {
-                    friends[*f].tryPath(tileId);
+                    if(!friends[*f].getSaved()){
+                        friends[*f].tryPath(tileId);
+                    }
                 }
-            }else {
+            } else {
                 switch (mouseMode) {
                     case DESTROY:
                         if (justIsland && res->hasPlayerFinishedWave()) {
@@ -70,7 +100,7 @@ void Click(int button,int _x,int _y,TileMap* tMap,ResourceBoss* res){
                         break;
                     case PLACE_LAND:
                         if (justWater && res->hasPlayerFinishedWave()) {
-                            if(res->addResources(-ISLAND_PRICE)) {
+                            if (res->addResources(-ISLAND_PRICE)) {
                                 drawBrush(ISLAND, 2, tMap, tileClick);
                             }
                         }
@@ -93,42 +123,16 @@ void Click(int button,int _x,int _y,TileMap* tMap,ResourceBoss* res){
                         }
                         break;
                     case CONTROL_FRIENDS:
-                        if (button == 1) {
 
-
-                            if (!selectionBoxOn) {
-                                selectionBoxOn = true;
-                                selectionBoxStart = sf::Vector2f(_x, _y);
-                                selectionBoxEnd = sf::Vector2f(_x, _y);
-                            } else {
-                                selectionBoxEnd = sf::Vector2f(_x, _y);
-                                selectedFriends.clear();
-                                //check box
-                                for (int i = 0; i < friends.size(); i++) {
-                                    Entity *f = &friends[i];
-                                    sf::Vector2f fPos = f->m_pos;
-                                    if (((fPos.x > selectionBoxStart.x && fPos.x < selectionBoxEnd.x) ||
-                                         (fPos.x < selectionBoxStart.x && fPos.x > selectionBoxEnd.x))
-                                        && (fPos.y > selectionBoxStart.y && fPos.y < selectionBoxEnd.y) ||
-                                        (fPos.y < selectionBoxStart.y && fPos.y > selectionBoxEnd.y)) {
-                                        selectedFriends.push_back(i);
-                                    }
-                                }
-                            }
-
-
-                        }
 
                         break;
                 }
             }
 
 
-
-
-
         }
     }
+
 }
 
 sf::Vector2i oldTileHover=sf::Vector2i(-100,-100);

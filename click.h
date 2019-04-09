@@ -24,7 +24,7 @@ extern MouseMode mouseMode;
 extern sf::Vector2i oldTileClick;
 extern sf::Vector2i oldTileHover;
 void Click(int button,int _x,int _y,TileMap* tMap,ResourceBoss* res);
-void drawBrush(int button,TileMap* tMap,sf::Vector2i tileClick);
+void drawBrush(Tile tileToDraw,int brushSize,TileMap* tMap,sf::Vector2i tileClick);
 void Hover(int _x,int _y,TileMap* tMap,ResourceBoss* res);
 
 #endif //SFMLREVOLUTIONISLE_CLICK_H

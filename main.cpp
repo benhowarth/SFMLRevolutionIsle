@@ -84,7 +84,10 @@ int const ISLAND_PRICE=10;
 #include "buildings.h"
 #include "ui.h"
 #include "click.h"
+bool inControl=false;
 
+
+const int meteorSize=tileSize*2;
 
 
 
@@ -94,9 +97,11 @@ int main(int argc, const char * argv[])
 {
     srand(time(NULL));
 
-    TileMap tMap(TINY_ISLAND,colNo,rowNo,&window);
+    TileMap tMap(colNo,rowNo,&window);
     UIBoss ui(&window,&view,&viewUI);
+    ui.initButtons();
     ResourceBoss res(&tMap,&friends,&enemies,&ui);
+    tMap.generateIsland(TINY_ISLAND,&res);
 
     //SFML Setup
     window.setVerticalSyncEnabled(true);
@@ -104,7 +109,7 @@ int main(int argc, const char * argv[])
 
     sf::Clock clock;
     sf::Clock deltaClock;
-    if (!font.loadFromFile("Unique.ttf"))
+    if(!font.loadFromFile("img/PressStart2P.ttf"))
     {
         // error...
     }
@@ -159,6 +164,7 @@ int main(int argc, const char * argv[])
 
 
     bool running=true;
+    bool mouseDown=false;
     sf::Vector2f viewPos=sf::Vector2f(screenWidth/2,screenHeight/2);
 
 
@@ -166,6 +172,32 @@ int main(int argc, const char * argv[])
     brush.setFillColor(sf::Color::Transparent);
     brush.setOutlineThickness(1.0);
     sf::Color brushCol=sf::Color::White;
+
+    //for intro meteor animation
+
+    enum meteorTexturePos{
+        METEOR_TEXTURE_POS_ARRIVING=0,
+        METEOR_TEXTURE_POS_LANDED=1,
+        METEOR_TEXTURE_POS_DAMAGE=2,
+        METEOR_TEXTURE_POS_DAMAGE_2=3,
+        METEOR_TEXTURE_POS_DEAD=4
+    };
+
+    float meteorTimer=0;
+    const float meteorTimerMax=2;
+    sf::Vector2f meteorStartPos=sf::Vector2f(screenWidth+20,-20);
+    std::string meteorImageFilePath="img/meteor.png";
+    sf::Texture meteorTexture;
+    if(!meteorTexture.loadFromFile(meteorImageFilePath)){
+        printf("Can't load meteor texture.\n");
+    }
+    meteorTexture.setSmooth(false);
+    meteorTexture.setRepeated(false);
+    sf::Sprite meteorSprite;
+    meteorSprite.setTexture(meteorTexture);
+    meteorSprite.setTextureRect(sf::IntRect(METEOR_TEXTURE_POS_ARRIVING*meteorSize,0,meteorSize,meteorSize));
+    meteorSprite.setPosition(-100,-100);
+
 
 
 
@@ -188,82 +220,85 @@ int main(int argc, const char * argv[])
 
                 bool shiftPressed=false;
                 if (event.type == sf::Event::KeyPressed) {
-                    if(event.key.code == sf::Keyboard::LShift || event.key.code == sf::Keyboard::RShift ){shiftPressed=true;}
 
-                    if (event.key.code == sf::Keyboard::Return) {
-                        res.tryToGoToNextWave();
-                    }
-                    if (event.key.code == sf::Keyboard::Delete) {
-                        res.endWave();
-                    }
+                    if(!inControl && res.getSavedDucks()<10) {inControl=true;}else {
+                        if (event.key.code == sf::Keyboard::LShift ||
+                            event.key.code == sf::Keyboard::RShift) { shiftPressed = true; }
 
-                    if (event.key.code == sf::Keyboard::N) {
-                        newFriend(&tMap,&res);
-                    }
-                    if (event.key.code == sf::Keyboard::M) {
-                        newEnemy(&tMap,&res);
-                    }
-                    if (event.key.code == sf::Keyboard::Num1) {
-                        toggleSelectFriend(0,!shiftPressed);
-                    }
-                    if (event.key.code == sf::Keyboard::Num2) {
-                        toggleSelectFriend(1,!shiftPressed);
-                    }
-                    if (event.key.code == sf::Keyboard::Num3) {
-                        toggleSelectFriend(2,!shiftPressed);
-                    }
-                    if (event.key.code == sf::Keyboard::Num4) {
-                        toggleSelectFriend(3,!shiftPressed);
-                    }
-                    if (event.key.code == sf::Keyboard::Num5) {
-                        toggleSelectFriend(4,!shiftPressed);
-                    }
-                    if (event.key.code == sf::Keyboard::Num6) {
-                        toggleSelectFriend(5,!shiftPressed);
-                    }
-                    if (event.key.code == sf::Keyboard::Num7) {
-                        toggleSelectFriend(6,!shiftPressed);
-                    }
-                    if(event.key.code == sf::Keyboard::Num8){
-                        toggleSelectFriend(7,!shiftPressed);
-                    }
-                    if(event.key.code == sf::Keyboard::Num9){
-                        toggleSelectFriend(8,!shiftPressed);
-                    }
-                    if (event.key.code == sf::Keyboard::Num0) {
-                        toggleSelectFriend(9,!shiftPressed);
-                    }
+                        if (event.key.code == sf::Keyboard::Return) {
+                            res.tryToGoToNextWave();
+                        }
+                        if (event.key.code == sf::Keyboard::Delete) {
+                            res.endWave();
+                        }
 
-                    if(event.key.code == sf::Keyboard::E){
-                        mouseMode=CONTROL_FRIENDS;
-                        brushSize = 1;
-                    }
-                    if(event.key.code == sf::Keyboard::Q){
-                        mouseMode=DESTROY;
-                        brushSize = 2;
-                    }
-                    if(event.key.code == sf::Keyboard::W){
-                        mouseMode=PLACE_LAND;
-                        brushSize = 2;
-                    }
-                    if(event.key.code == sf::Keyboard::A){
-                        mouseMode=PLACE_ROAD;
-                        brushSize = 1;
-                    }
-                    if(event.key.code == sf::Keyboard::S){
-                        mouseMode=BUILD_WAREHOUSE;
-                        brushSize = 2;
-                    }
-                    if(event.key.code == sf::Keyboard::D){
-                        mouseMode=BUILD_LIGHTHOUSE;
-                        brushSize = 1;
-                    }
+                        if (event.key.code == sf::Keyboard::N) {
+                            newFriend(&tMap, &res);
+                        }
+                        if (event.key.code == sf::Keyboard::M) {
+                            newEnemy(&tMap, &res);
+                        }
+                        if (event.key.code == sf::Keyboard::Num1) {
+                            toggleSelectFriend(0, !shiftPressed);
+                        }
+                        if (event.key.code == sf::Keyboard::Num2) {
+                            toggleSelectFriend(1, !shiftPressed);
+                        }
+                        if (event.key.code == sf::Keyboard::Num3) {
+                            toggleSelectFriend(2, !shiftPressed);
+                        }
+                        if (event.key.code == sf::Keyboard::Num4) {
+                            toggleSelectFriend(3, !shiftPressed);
+                        }
+                        if (event.key.code == sf::Keyboard::Num5) {
+                            toggleSelectFriend(4, !shiftPressed);
+                        }
+                        if (event.key.code == sf::Keyboard::Num6) {
+                            toggleSelectFriend(5, !shiftPressed);
+                        }
+                        if (event.key.code == sf::Keyboard::Num7) {
+                            toggleSelectFriend(6, !shiftPressed);
+                        }
+                        if (event.key.code == sf::Keyboard::Num8) {
+                            toggleSelectFriend(7, !shiftPressed);
+                        }
+                        if (event.key.code == sf::Keyboard::Num9) {
+                            toggleSelectFriend(8, !shiftPressed);
+                        }
+                        if (event.key.code == sf::Keyboard::Num0) {
+                            toggleSelectFriend(9, !shiftPressed);
+                        }
 
-                    if(event.key.code == sf::Keyboard::Up){enemySpawnDir=N;}
-                    if(event.key.code == sf::Keyboard::Right){enemySpawnDir=E;}
-                    if(event.key.code == sf::Keyboard::Down){enemySpawnDir=S;}
-                    if(event.key.code == sf::Keyboard::Left){enemySpawnDir=W;}
+                        if (event.key.code == sf::Keyboard::E) {
+                            mouseMode = CONTROL_FRIENDS;
+                            brushSize = 1;
+                        }
+                        if (event.key.code == sf::Keyboard::Q) {
+                            mouseMode = DESTROY;
+                            brushSize = 2;
+                        }
+                        if (event.key.code == sf::Keyboard::W) {
+                            mouseMode = PLACE_LAND;
+                            brushSize = 2;
+                        }
+                        if (event.key.code == sf::Keyboard::A) {
+                            mouseMode = PLACE_ROAD;
+                            brushSize = 1;
+                        }
+                        if (event.key.code == sf::Keyboard::S) {
+                            mouseMode = BUILD_WAREHOUSE;
+                            brushSize = 2;
+                        }
+                        if (event.key.code == sf::Keyboard::D) {
+                            mouseMode = BUILD_LIGHTHOUSE;
+                            brushSize = 1;
+                        }
 
+                        if (event.key.code == sf::Keyboard::Up) { enemySpawnDir = N; }
+                        if (event.key.code == sf::Keyboard::Right) { enemySpawnDir = E; }
+                        if (event.key.code == sf::Keyboard::Down) { enemySpawnDir = S; }
+                        if (event.key.code == sf::Keyboard::Left) { enemySpawnDir = W; }
+                    }
 
                 }
 
@@ -274,12 +309,12 @@ int main(int argc, const char * argv[])
                     mouseX = worldMouseCoords.x;
                     mouseY = worldMouseCoords.y;
                 }
-                if (event.type == sf::Event::MouseWheelScrolled) {
+                if (event.type == sf::Event::MouseWheelScrolled && inControl) {
                     if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
                         //scaleFactor.x += event.mouseWheelScroll.delta * 0.1;
                         //scaleFactor.y += event.mouseWheelScroll.delta * 0.1;
                         float zoomToAdd=-event.mouseWheelScroll.delta*0.1;
-                        if(viewZoom+zoomToAdd>0.2 && viewZoom+zoomToAdd<1.7) {
+                        if(viewZoom+zoomToAdd>0.2 && viewZoom+zoomToAdd<2) {
                             viewZoom += zoomToAdd;
                             view.zoom(1 + zoomToAdd);
                             window.setView(view);
@@ -292,11 +327,24 @@ int main(int argc, const char * argv[])
 
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && running) {
-                Click(1,mouseX, mouseY, &tMap,&res);
-            }else if(sf::Mouse::isButtonPressed(sf::Mouse::Right) && running) {
+                if(inControl) {
+                    if (!mouseDown) {
+                        if (!ui.checkButtonsClick(mouseXView, mouseYView)) {
+                            Click(1, mouseX, mouseY, &tMap, &res);
+                        } else {
+                            mouseDown = true;
+                        }
+                    }
+                }else if(res.getSavedDucks()<10){
+                    inControl=true;
+                }
+
+            }else if(sf::Mouse::isButtonPressed(sf::Mouse::Right) && running && inControl) {
                 //res.printBuildings();
                 Click(2, mouseX, mouseY, &tMap,&res);
             } else {
+
+                mouseDown=false;
                 oldTileClick = sf::Vector2i(-100, -100);
                 /*for(int x=0;x<2;x++){
                     for(int y=0;y<2;y++){
@@ -308,7 +356,7 @@ int main(int argc, const char * argv[])
             }
 
             //move view
-            if(running) {
+            if(running && inControl) {
                 sf::Vector2f viewOffset = sf::Vector2f(0, 0);
                 if (mouseXView < screenMovePixelBuffer) {
                     viewOffset.x = -(screenMovePixelBuffer - mouseXView);
@@ -358,55 +406,95 @@ int main(int argc, const char * argv[])
             tMap.draw(secs);
 
 
+            if(meteorTimer<meteorTimerMax){
+                meteorSprite.setTextureRect(sf::IntRect(METEOR_TEXTURE_POS_ARRIVING*meteorSize,0,meteorSize,meteorSize));
+            }else{
+                if(res.getHP()>0) {
+                    if (res.getTakenDamageAnimationTimer()>res.m_takenDamageAnimationTimerMax/2) {
+                        meteorSprite.setTextureRect(sf::IntRect(METEOR_TEXTURE_POS_DAMAGE*meteorSize, 0, meteorSize, meteorSize));
+                    } else if (res.getTakenDamageAnimationTimer()>0) {
+                        meteorSprite.setTextureRect(sf::IntRect(METEOR_TEXTURE_POS_DAMAGE_2*meteorSize, 0, meteorSize, meteorSize));
+                    }else {
+                        meteorSprite.setTextureRect(sf::IntRect(METEOR_TEXTURE_POS_LANDED*meteorSize, 0, meteorSize, meteorSize));
+                    }
+                }else{
+                    meteorSprite.setTextureRect(sf::IntRect(METEOR_TEXTURE_POS_DEAD*meteorSize, 0, meteorSize, meteorSize));
+                }
+            }
+
+            window.draw(meteorSprite);
+
             updateAndDrawFriends(secs,dt,&res);
             updateAndDrawEnemies(secs,dt,&res);
             res.updateAndDraw(window,secs,dt);
 
             //draw brush
 
+            if(inControl) {
 
-            brush.setSize(sf::Vector2f(tileSize * brushSize * scaleFactor.x, tileSize * brushSize * scaleFactor.y));
-            sf::Vector2i brushPos = tMap.getTileCoordsFromPos(sf::Vector2f(mouseX, mouseY),brushSize);
-            brushPos.x *= tileSize * scaleFactor.x;
-            brushPos.y *= tileSize * scaleFactor.y;
-            if(brushPos.x>=0&&brushPos.x<colNo*tileSize*scaleFactor.x&&brushPos.y>=0&&brushPos.y<rowNo*tileSize*scaleFactor.y) {
-                brush.setPosition(sf::Vector2f(brushPos.x,brushPos.y));
-            }
-            if(!selectionBoxOn && mouseMode!=CONTROL_FRIENDS) {
-                brushCol=sf::Color::White;
-                if(mouseMode==PLACE_LAND) {
-                    if (!res.hasPlayerFinishedWave() || res.getResources()<ISLAND_PRICE) {
-                        brushCol = sf::Color::Red;
+
+                //draw meteor
+                if(meteorTimer<meteorTimerMax){
+                    meteorSprite.setOrigin(meteorSize/2,meteorSize/2);
+                    meteorSprite.setRotation(360*3*(meteorTimer/meteorTimerMax));
+                    int resFactor=res.getResources()/2000;
+                    if(resFactor>1){resFactor=1;}
+                    meteorSprite.setScale(1+resFactor,1+resFactor);
+                    //meteorSprite.setOrigin(0,0);
+                    meteorSprite.setPosition(vec::Lerp(meteorStartPos,sf::Vector2f(tMap.getMiddleTilePos().x+tileSize,tMap.getMiddleTilePos().y+tileSize),meteorTimer/meteorTimerMax));
+                    meteorTimer+=dt;
+                    if(meteorTimer>meteorTimerMax){
+                        newFriend(&tMap,&res);
                     }
                 }
-                if((mouseMode==BUILD_WAREHOUSE && res.getResources()<Warehouse::cost)||(mouseMode==BUILD_LIGHTHOUSE && res.getResources()<Lighthouse::cost)){
 
-                    brushCol = sf::Color::Red;
+                brush.setSize(sf::Vector2f(tileSize * brushSize * scaleFactor.x, tileSize * brushSize * scaleFactor.y));
+                sf::Vector2i brushPos = tMap.getTileCoordsFromPos(sf::Vector2f(mouseX, mouseY), brushSize);
+                brushPos.x *= tileSize * scaleFactor.x;
+                brushPos.y *= tileSize * scaleFactor.y;
+                if (brushPos.x >= 0 && brushPos.x < colNo * tileSize * scaleFactor.x && brushPos.y >= 0 &&
+                    brushPos.y < rowNo * tileSize * scaleFactor.y) {
+                    brush.setPosition(sf::Vector2f(brushPos.x, brushPos.y));
                 }
-                brush.setOutlineColor(brushCol);
-                window.draw(brush);
-            }
+                if (!selectionBoxOn && mouseMode != CONTROL_FRIENDS) {
+                    brushCol = sf::Color::White;
+                    if (mouseMode == PLACE_LAND) {
+                        if (!res.hasPlayerFinishedWave() || res.getResources() < ISLAND_PRICE) {
+                            brushCol = sf::Color::Red;
+                        }
+                    }
+                    if ((mouseMode == BUILD_WAREHOUSE && res.getResources() < Warehouse::cost) ||
+                        (mouseMode == BUILD_LIGHTHOUSE && res.getResources() < Lighthouse::cost)) {
 
-            if(selectionBoxOn) {
-                sf::RectangleShape selectionBox = sf::RectangleShape(selectionBoxEnd - selectionBoxStart);
-                selectionBox.setOutlineThickness(2);
-                selectionBox.setPosition(selectionBoxStart);
-                selectionBox.setFillColor(sf::Color::Transparent);
-                selectionBox.setOutlineColor(sf::Color::White);
-                window.draw(selectionBox);
-            }
+                        brushCol = sf::Color::Red;
+                    }
+                    brush.setOutlineColor(brushCol);
+                    window.draw(brush);
+                }
 
-            //draw circles
-            sf::CircleShape selectCirc(16);
-            selectCirc.setOutlineColor(sf::Color::White);
-            selectCirc.setFillColor(sf::Color::Transparent);
-            selectCirc.setOutlineThickness(1);
-            selectCirc.setOrigin(16,16);
-            for (int i = 0; i < selectedFriends.size(); i++) {
-                Entity *f = &friends[selectedFriends[i]];
-                sf::Vector2f fPos = (*f).m_pos;
-                selectCirc.setPosition(fPos);
-                window.draw(selectCirc);
+                if (selectionBoxOn) {
+                    sf::RectangleShape selectionBox = sf::RectangleShape(selectionBoxEnd - selectionBoxStart);
+                    selectionBox.setOutlineThickness(2);
+                    selectionBox.setPosition(selectionBoxStart);
+                    selectionBox.setFillColor(sf::Color::Transparent);
+                    selectionBox.setOutlineColor(sf::Color::White);
+                    window.draw(selectionBox);
+                }
+
+                //draw circles
+                sf::CircleShape selectCirc(16);
+                selectCirc.setOutlineColor(sf::Color::White);
+                selectCirc.setFillColor(sf::Color::Transparent);
+                selectCirc.setOutlineThickness(1);
+                selectCirc.setOrigin(16, 16);
+                for (int i = 0; i < selectedFriends.size(); i++) {
+                    Entity *f = &friends[selectedFriends[i]];
+                    if(!f->getSaved()) {
+                        sf::Vector2f fPos = (*f).m_pos;
+                        selectCirc.setPosition(fPos);
+                        window.draw(selectCirc);
+                    }
+                }
             }
 
 
@@ -453,29 +541,60 @@ int main(int argc, const char * argv[])
             timeText.setPosition(10, 50);
             //ui.drawOnUI(timeText);
 
-            timeText.setFillColor(sf::Color::Blue);
-            timeText.setPosition(10,80);
-            timeText.setString(std::to_string(res.getResources())+"R");
-            ui.drawOnUI(timeText);
+            if(inControl) {
+                timeText.setFillColor(sf::Color::Blue);
+                timeText.setPosition(10, 80);
+                timeText.setString(std::to_string(res.getResources()) +"/"+ std::to_string(res.m_resourcesMax)  + "R");
+                ui.drawOnUI(timeText);
 
-            std::string waveBarString="Wave: "+std::to_string(res.getCurrentWave())+" ("+std::to_string(res.getWaveFactor())+")";
-            sf::Color waveBarCol=colorMult(sf::Color::Green,0.7);
-            if(res.getWavePercentageComplete()>=1 && enemies.size()==0){
-                if(res.getCurrentWave()==0){
-                    waveBarString="Press Enter to start Wave "+std::to_string(res.getCurrentWave()+1);
-                }else {
-                    waveBarString ="Wave "+std::to_string(res.getCurrentWave())+" complete! Press Enter to start Wave "+std::to_string(res.getCurrentWave() + 1);
+                //std::string waveBarString="Wave: "+std::to_string(res.getCurrentWave())+" ("+std::to_string(res.getWaveFactor())+")";
+                std::string waveBarString ="Wave: " + std::to_string(res.getCurrentWave());
+                sf::Color waveBarCol = colorMult(sf::Color::Green, 0.7);
+
+                if (res.getWavePercentageComplete() >= 0.9) {
+                    if(enemies.size() > 0) {
+                        std::string waveBarString =
+                                "Wave: " + std::to_string(res.getCurrentWave()) + " (" + std::to_string(enemies.size()) +
+                                " enemies left)";
+                    }else{
+                        if (res.getCurrentWave() == 0) {
+                            waveBarString = "Press Enter to start Wave " + std::to_string(res.getCurrentWave() + 1);
+                        } else {
+                            waveBarString =
+                                    "Wave " + std::to_string(res.getCurrentWave()) +
+                                    " complete! Press Enter to start Wave " +
+                                    std::to_string(res.getCurrentWave() + 1);
+                        }
+                    }
                 }
+
+
+                ui.drawHealthBar(res.getHP(), 100, sf::Vector2f(screenWidth / 2, 20),
+                                 sf::Vector2f(screenWidth - 20, 30), sf::Color::White, sf::Color::Red, true,
+                                 "METEOR HEALTH");
+                ui.drawHealthBar(res.getWavePercentageComplete(), 1, sf::Vector2f(screenWidth / 2, 50),
+                                 sf::Vector2f(screenWidth - 20, 30), sf::Color::White,
+                                 colorMult(waveBarCol, res.getWavePercentageComplete()), true, waveBarString);
+
+                ui.draw(dt);
+
             }else{
-                waveBarCol=colorMult(sf::Color::Blue,1.2);
+                if(res.getSavedDucks()==10) {
+                    timeText.setFillColor(sf::Color::Green);
+                    timeText.setPosition((screenWidth/2)-350, screenHeight / 3);
+                    timeText.setString("Winner! The ducks are safe!");
+
+                }else if(res.getHP()>0) {
+                    timeText.setFillColor(sf::Color::White);
+                    timeText.setPosition(30, screenHeight / 3);
+                    timeText.setString("Build lighthouse turrets for protection!\nBuild warehouses for more resources!\nProtect your meteor!\nPress anything to begin!");
+                }else{
+                    timeText.setFillColor(sf::Color::Red);
+                    timeText.setPosition((screenWidth/2)-100, screenHeight / 3);
+                    timeText.setString("Game Over!");
+                }
+                ui.drawOnUI(timeText);
             }
-
-
-            ui.drawHealthBar(res.getHP(),100,sf::Vector2f(screenWidth/2,20),sf::Vector2f(screenWidth-20,30),sf::Color::White,sf::Color::Red,true,"METEOR HEALTH");
-            ui.drawHealthBar(res.getWavePercentageComplete(),1,sf::Vector2f(screenWidth/2,50),sf::Vector2f(screenWidth-20,30),sf::Color::White,waveBarCol,true,waveBarString);
-
-            ui.draw(dt);
-
 
         window.display();
 

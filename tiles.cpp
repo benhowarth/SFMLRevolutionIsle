@@ -8,6 +8,9 @@
 #include <SFML/Graphics.hpp>
 
 #include "tiles.h"
+#include "tools.h"
+#include "resources.h"
+#include "click.h"
 
 #include<vector>
 #include<algorithm>
@@ -16,10 +19,23 @@
 
 #define NODE_MAX_COST 500
 
+/*enum Tile{
+    NILTILE=-1,
+    WATER=0,
+    ISLAND=1,
+    ROAD=2,
+    WAREHOUSE=3,
+    LIGHTHOUSE=4,
+    DOCK=5,
+    ROADWATER=6,
+    METEOR=7
+};*/
 
 
 int tileMapNoX,tileMapNoY;
 sf::Sprite tile;
+
+
 
 int tileWeights[]={5000,500,5,100,100,5,5};
 const std::vector<Tile> tMask_island_general={ISLAND,ROAD,WAREHOUSE,LIGHTHOUSE,METEOR};
@@ -38,7 +54,16 @@ sf::Vector2f scaleFactor=sf::Vector2f(1.0f,1.0f);
 int brushSize=2;
 Tile brushTile=ISLAND;
 
-void TileMap::generateIsland(IslandType t_islandToMake) {
+
+TileMap::TileMap(int t_colNo, int t_rowNo, sf::RenderWindow *t_win) {
+    m_colNo = t_colNo;
+    m_rowNo = t_rowNo;
+    m_win = t_win;
+    m_tiles.reserve(m_colNo * m_rowNo);
+    //generateIsland(t_islandToMake);
+}
+
+void TileMap::generateIsland(IslandType t_islandToMake,ResourceBoss* t_res) {
     if (t_islandToMake == SQUARE_ISLAND) {
         int islandBuffer = 10;
         for (int i = 0; i < m_colNo * m_rowNo; i++) {
@@ -97,6 +122,15 @@ void TileMap::generateIsland(IslandType t_islandToMake) {
         }
     }
 
+    for(int i=0;i<10;i++){
+        sf::Vector2i tileCoords=getMiddleTileCoords();
+        while(vec::Length(getMiddleTileCoords()-tileCoords)<20 || tileCoords.x<4 || tileCoords.x>colNo-4 || tileCoords.y<4 || tileCoords.y>rowNo-4 || tileCoords.x%2!=0 || tileCoords.y%2!=0) {
+            tileCoords=sf::Vector2i(getRandom(0,colNo),getRandom(0,rowNo));
+            //printf("%f\n",vec::Length(getMiddleTileCoords()-tileCoords));
+        }
+        drawBrush(METEOR,2,this,tileCoords);
+        t_res->buildRocket(tileCoords.x,tileCoords.y);
+    }
 
     for (int i = 0; i < m_colNo * m_rowNo; i++) {
         updateTile(i);
@@ -213,10 +247,10 @@ sf::Vector2i TileMap::getMiddleTilePos(){
     return getTilePosFromId(getMiddleTileId());
 };
 
-sf::Vector2i TileMap::getNearestTileAt(const sf::Vector2f &t_pos,const Tile &t_tile){
+TileStruct* TileMap::getNearestTileAt(const sf::Vector2f &t_pos,const Tile &t_tile){
     TileStruct* tile=getTileFromId(getTileIdFromPos(t_pos,1));
     std::vector<TileStruct*> toCheck;
-    while(tile->basicTile!=t_tile){
+    while(tile->basicTile!=t_tile && !toCheck.empty()){
         for(int n:tile->ns){
             TileStruct* neighbour=getTileFromId(n);
             if(!neighbour->visited){
@@ -228,7 +262,11 @@ sf::Vector2i TileMap::getNearestTileAt(const sf::Vector2f &t_pos,const Tile &t_t
         toCheck.pop_back();
     }
     resetTiles();
-    return getTilePosFromId(tile->id);
+    if(toCheck.empty()){
+        return nullptr;
+    }else{
+        return getTileFromId(tile->id);
+    }
 }
 
 

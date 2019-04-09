@@ -8,6 +8,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <cmath>
 
 #include "tiles.h"
 #include "buildings.h"
@@ -28,6 +29,8 @@ extern CompassDir enemySpawnDir;
 
 void drawCharAt(sf::RenderWindow &win,int charDir,int x,int y,float scaleX,float scaleY);
 
+class TileMap;
+
 class Entity{
 private:
     float s_roadSpeedBoost=1.5;
@@ -47,7 +50,9 @@ public:
     bool toDelete=false;
     std::vector<Tile> const* m_pathMask=&tMask_all;
     sf::Sprite* m_sprite=&charSprite;
+    bool m_dancing=false;
 public:
+    bool m_saved=false;
     Entity(TileMap* t_tMap,ResourceBoss* t_res){
         m_pos=sf::Vector2f(0,0);
         m_tPos=m_pos;
@@ -103,6 +108,8 @@ public:
     bool tryPath(int tileId);
     void attachToBuilding(Building* curBuild);
     void detachFromBuilding();
+    void save();
+    bool getSaved();
 };
 class Friend:public Entity{
 public:

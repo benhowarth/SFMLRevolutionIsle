@@ -107,6 +107,7 @@ void Entity::attachToBuilding(Building* curBuild) {
     m_buildingParent->addInhabitant(this);
     invisible = true;
     m_targets.clear();
+    m_pos=sf::Vector2f(curBuild->m_pos.x+tileSize,curBuild->m_pos.y);
 }
 
 void Entity::detachFromBuilding() {
@@ -150,6 +151,16 @@ bool Entity::tryPath(int tileId) {
     }
 }
 
+void Entity::save(){
+    //printf("saved!\n");
+    m_saved=true;
+    m_res->incrementSavedDucks();
+}
+
+bool Entity::getSaved(){
+    return m_saved;
+}
+
 Friend::Friend(TileMap* tMap,ResourceBoss* res,int t_x,int t_y):Entity(tMap,res,t_x,t_y,1){
     m_pathMask=&tMask_island_general;
     m_sprite=&charSprite;
@@ -157,60 +168,68 @@ Friend::Friend(TileMap* tMap,ResourceBoss* res,int t_x,int t_y):Entity(tMap,res,
 };
 
 void Friend::update(float time,float dt){
-    if(m_targets.size()>0) {
-        moveToTarget();
-    }else if(!m_buildingParent){
-        //printf("not in building\n");
-        sf::Vector2f testPos=m_tPos;
-        testPos.x+=tileSize/2;
-        testPos.y+=tileSize/2;
-        sf::Vector2i coords=m_tMap->getTileCoordsFromPos(testPos,1);
-        Building* curBuild=m_res->getBuildingByCoords(coords);
-        //Building* curBuild=nullptr;
-        if(curBuild) {
-            m_pos.x+=tileSize*1.25;
+    if(!getSaved()) {
+        if (m_targets.size() > 0) {
+            moveToTarget();
+        } else if (!m_buildingParent) {
+            //printf("not in building\n");
+            sf::Vector2f testPos = m_tPos;
+            testPos.x += tileSize / 2;
+            testPos.y += tileSize / 2;
+            sf::Vector2i coords = m_tMap->getTileCoordsFromPos(testPos, 1);
+            Building *curBuild = m_res->getBuildingByCoords(coords);
+            //Building* curBuild=nullptr;
+            if (curBuild) {
+                m_pos.x += tileSize * 1.25;
 
-            attachToBuilding(curBuild);
-            //printf("got building\n");
-        }
-        else if(time>idleMoveTime) {
-            sf::Vector2f newTPos = m_pos;
-            Tile tileToGo = WATER;
-            int tries = 0;
-            while (tileToGo == WATER && tries < 2) {
-                newTPos = m_pos;
-                float rx = ((float) rand() / ((float) RAND_MAX)) * 10 - 5;
-                float ry = ((float) rand() / ((float) RAND_MAX)) * 10 - 5;
-                //printf("rand x:%f y:%f\n", rx, ry);
-                //printf("%f,%f\n", m_pos.x, m_pos.y);
-                newTPos.x += rx;
-                newTPos.y += ry;
-                //printf("%f,%f\n", newTPos.x, newTPos.y);
-                tileToGo = m_tMap->getTileFromId(m_tMap->getTileIdFromPos(newTPos, 1))->basicTile;
-                tries++;
+                attachToBuilding(curBuild);
+                //printf("got building\n");
+            } else if (time > idleMoveTime) {
+                sf::Vector2f newTPos = m_pos;
+                Tile tileToGo = WATER;
+                int tries = 0;
+                while (tileToGo == WATER && tries < 2) {
+                    newTPos = m_pos;
+                    float rx = getRandom(-5, 5);
+                    float ry = getRandom(-5, 5);
+                    //printf("rand x:%f y:%f\n", rx, ry);
+                    //printf("%f,%f\n", m_pos.x, m_pos.y);
+                    newTPos.x += rx;
+                    newTPos.y += ry;
+                    //printf("%f,%f\n", newTPos.x, newTPos.y);
+                    tileToGo = m_tMap->getTileFromId(m_tMap->getTileIdFromPos(newTPos, 1))->basicTile;
+                    tries++;
+                }
+                addTarget(newTPos);
+
+                double rtime = ((double) rand() / ((double) RAND_MAX) * 4) + 2;
+                //printf("time now %f vs time to next move %f\n",time,time+rtime);
+                idleMoveTime = time + rtime;
             }
-            addTarget(newTPos);
 
-            double rtime = ((double) rand() / ((double) RAND_MAX) * 4) + 2;
-            //printf("time now %f vs time to next move %f\n",time,time+rtime);
-            idleMoveTime = time + rtime;
+        } else {
+            //if in building
+            //printf("in building\n");
+            /*if(m_targets.size()>0){
+                detachFromBuilding();
+            }*/
         }
 
-    }else{
-        //if in building
-        //printf("in building\n");
-        /*if(m_targets.size()>0){
-            detachFromBuilding();
-        }*/
     }
 }
+
 
 void Enemy::update(float time,float dt){
 
     if(m_pos.x<screenWidth && m_pos.x>0 && m_pos.y<screenHeight && m_pos.y>0) {
         if(m_tMap->getTileFromPos(m_pos,1)->basicTile==WATER) {
             //get nearest island tile
-            setTarget(sf::Vector2f(m_tMap->getNearestTileAt(m_pos,ISLAND)));
+            TileStruct* nearestIslandTile=m_tMap->getNearestTileAt(m_pos,ISLAND);
+            if(nearestIslandTile) {
+                setTarget(sf::Vector2f(m_tMap->getTilePosFromId(nearestIslandTile->id)));
+            }else{
+                setTarget(sf::Vector2f(m_tMap->getMiddleTilePos()));
+            }
             moveToTarget();
        }else{
             if (vec::Length(m_tMap->getMiddleTilePos() - sf::Vector2i(m_pos)) > tileSize * 2) {
@@ -230,6 +249,7 @@ void Enemy::update(float time,float dt){
                         damageTime = time + damageTimeInterval;
                     } else {
                         //meteor is dead
+                        m_dancing=true;
                     }
                 }
             }
@@ -305,8 +325,10 @@ void updateAndDrawFriends(float time,float dt,ResourceBoss* t_res) {
         int deletedFriends = 0;
         for (auto f = friends.begin(); f != friends.end();) {
             if (!f->isToDelete()) {
-                f->update(time, dt);
-                f->draw(&window);
+                if(!f->getSaved()) {
+                    f->update(time, dt);
+                    f->draw(&window);
+                }
                 ++f;
             } else {
                 //delete friend
